@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FBF5F4">
+<title>Camilla Lash — protótipo das telas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#FBF5F4;--bg2:#F5E7E8;--surface:#FFFFFF;--ink:#33202A;--muted:#7B636B;--line:rgba(51,32,42,.14);--accent:#9B4A60;--accent-d:#7E3A4E;--deep:#5F3542;--ok:#2F6B4F;--okbg:#E4F0E9;--warn:#8A5A0B;--warnbg:#FAEED3;
+--ease:cubic-bezier(.2,.7,.2,1);--in:150ms;--out:120ms}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-tap-highlight-color:rgba(155,74,96,.15)}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);background:#E9DEDF;font-size:16px;line-height:1.6;display:flex;flex-direction:column;align-items:center;gap:80px;padding:40px 0}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a,button,summary,input{touch-action:manipulation}
+img{display:block;max-width:100%}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:16px;z-index:9;background:#fff;padding:8px 16px;border-radius:8px}
+.screen{background:var(--bg);overflow:hidden;position:relative}
+.d{width:1440px}.m{width:390px}
+.h1,.h2,.h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;letter-spacing:-.01em;line-height:1.06;text-wrap:balance}
+.h1{font-size:72px}.h2{font-size:48px}.h3{font-size:28px;line-height:1.15}
+.h1 span,.h2 span{color:var(--muted)}
+.lead{font-size:19px;max-width:62ch}
+.muted{color:var(--muted)}.small{font-size:14px}.label{font-size:13px;font-weight:500;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+.row{display:flex;align-items:center}.col{display:flex;flex-direction:column}.between{justify-content:space-between}
+.g8{gap:8px}.g12{gap:12px}.g16{gap:16px}.g24{gap:24px}.g32{gap:32px}.g48{gap:48px}
+.grow{flex:1;min-width:0}
+.i{flex:none}
+.wrap{width:100%;padding-inline:80px}
+.sec{padding:120px 80px 72px}
+.head{margin-bottom:48px;gap:16px;max-width:760px}
+
+/* Botões e links */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 22px;border-radius:999px;font-size:15px;font-weight:600;white-space:nowrap;transition:transform var(--out) var(--ease),background-color var(--out) var(--ease),border-color var(--out) var(--ease)}
+.btn.pri{background:var(--accent);color:#fff}
+.btn.sec{border:1px solid rgba(51,32,42,.28)}
+.btn.lg{height:52px;padding:0 28px;font-size:16px}
+.btn.full{width:100%}
+.btn:hover{transform:translateY(-1px);transition-duration:var(--in)}
+.btn.pri:hover{background:var(--accent-d)}
+.btn.sec:hover{background:rgba(51,32,42,.06);border-color:var(--ink)}
+.btn:active{transform:translateY(1px) scale(.985);transition-duration:90ms}
+.go{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--accent)}
+.go .i{transition:transform var(--out) var(--ease)}.go:hover .i{transform:translateX(3px)}
+.ul,.go{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size var(--in) var(--ease)}
+.ul:hover,.go:hover{background-size:100% 1px}
+
+/* Blocos */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px}
+a.card{display:block;transition:transform var(--out) var(--ease)}a.card:hover{transform:translateY(-2px)}
+.photo{border-radius:20px;overflow:hidden;background:var(--bg2);position:relative}
+.photo img{width:100%;height:100%;object-fit:cover;transition:transform 400ms var(--ease)}
+a.photo:hover img,.card:hover .photo img,.gal .photo:hover img{transform:scale(1.03);transition-duration:600ms}
+.tag{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:500;background:var(--bg2);white-space:nowrap}
+.tag.ok{background:var(--okbg);color:var(--ok)}.tag.warn{background:var(--warnbg);color:var(--warn)}.tag.on{background:var(--ink);color:#fff}
+.logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:600;line-height:1}
+.logo span{color:var(--accent)}
+.bar{height:6px;border-radius:99px;background:var(--bg2);overflow:hidden}
+.bar i{display:block;height:100%;width:100%;background:var(--accent);border-radius:99px;transform-origin:left;transform:scaleX(var(--p))}
+.av{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none}
+.ini{width:40px;height:40px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;flex:none}
+.ficon{width:44px;height:44px;border-radius:12px;background:var(--bg2);color:var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
+.checks li{display:flex;gap:12px;align-items:flex-start;padding:7px 0}
+.checks .i{color:var(--accent);margin-top:3px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-size:14px;font-weight:600}
+.field input,.field textarea,.field select,.find input{height:48px;width:100%;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);padding:0 16px;font:inherit;font-size:16px;transition:border-color var(--in) var(--ease)}
+.field textarea{height:110px;padding:12px 16px;resize:vertical}
+.field input:focus-visible,.field textarea:focus-visible,.find input:focus-visible{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent)}
+::placeholder{color:#9A868C}
+.play{width:72px;height:72px;border-radius:50%;background:#fff;color:var(--ink);display:flex;align-items:center;justify-content:center;position:absolute;inset:0;margin:auto;transition:transform var(--out) var(--ease)}
+.play:hover{transform:scale(1.06)}.play:active{transform:scale(.97)}
+.dim::after{content:"";position:absolute;inset:0;background:rgba(51,32,42,.38)}
+.dim .play{z-index:1}
+
+/* Landing */
+.nav{height:72px;display:flex;align-items:center;border-bottom:1px solid var(--line);background:var(--bg)}
+.links{gap:32px;font-size:15px}.links a{padding:6px 0}
+.links a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size var(--in) var(--ease)}.links a:hover{background-size:100% 1px}
+.hero{padding:72px 80px 96px;gap:72px;align-items:center}
+.hero .photo{width:560px;height:620px;flex:none}
+.hero .photo img{object-position:64% 0;height:109%}
+.arch{border-radius:999px 999px 20px 20px}.arch img{transform:scale(1.06)}
+.round{clip-path:circle(47%)}
+.facts{gap:32px;padding-top:28px;border-top:1px solid var(--line);font-size:15px}
+.facts span{display:flex;align-items:center;gap:10px}.facts .i{color:var(--accent)}
+.alt{background:var(--bg2)}.alt .tag{background:#fff}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}.g4 .prod .between{flex-wrap:wrap;gap:12px}.g4 .prod .b{padding:20px}
+.opt{padding:20px}
+.was{color:var(--muted);font-size:15px;text-decoration:line-through}
+.tag.off{height:22px;padding:0 8px;background:var(--okbg);color:var(--ok);font-weight:600}
+.alt .ficon{background:#fff}
+.cat{gap:64px;align-items:flex-start;padding:48px 0;border-top:1px solid var(--line)}
+.tag.lk{height:36px;padding:0 16px;font-size:14px;transition:background-color var(--out) var(--ease)}.tag.lk:hover{background:#EBD5D8}
+.seg{background:var(--bg2);border-radius:999px;padding:4px;gap:4px}.seg button{flex:1;height:36px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600;color:var(--muted);transition:background-color var(--out) var(--ease)}.seg .on{background:#fff;color:var(--ink)}
+.svc{padding:24px 0;border-top:1px solid var(--line);gap:20px;align-items:flex-start}
+.svc:last-child{border-bottom:1px solid var(--line)}
+.stat b{font-size:44px;font-weight:500;line-height:1.1;letter-spacing:-.03em;display:block}
+.stat span{font-size:14px;color:var(--muted)}
+.deep{background:var(--deep);color:#fff}.deep .muted{color:#E3CCD2}
+.deep .ficon{background:rgba(255,255,255,.12);color:#fff}
+.step{gap:16px;padding-top:28px;border-top:1px solid rgba(255,255,255,.22)}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.gal .photo{aspect-ratio:4/5}
+details{border-top:1px solid var(--line)}details:last-of-type{border-bottom:1px solid var(--line)}
+summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 0;font-size:19px;font-weight:500;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary .i{transition:transform var(--in) var(--ease);color:var(--muted)}details[open] summary .i{transform:rotate(180deg)}
+details p{padding:0 48px 24px 0;color:var(--muted);max-width:62ch}
+.close{margin:0 80px 96px;border-radius:20px;padding:72px;gap:56px}
+.close img{width:200px;height:200px;border-radius:50%;object-fit:cover;flex:none}
+.foot{padding:40px 0;border-top:1px solid var(--line);font-size:15px}
+.prod .photo{border-radius:19px 19px 0 0;aspect-ratio:4/3}
+.prod .b{padding:24px;gap:12px}
+.price{font-size:28px;font-weight:600;line-height:1;letter-spacing:-.02em}
+
+/* Área logada */
+.app{display:flex;min-height:900px}
+.side{width:264px;flex:none;background:var(--surface);border-right:1px solid var(--line);padding:28px 16px;gap:32px}
+.side .logo{padding:0 12px}
+.menu{gap:4px}
+.menu a{height:44px;padding:0 12px;border-radius:12px;display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500;color:var(--muted);transition:background-color var(--out) var(--ease),color var(--out) var(--ease)}
+.menu a:hover{background:rgba(51,32,42,.05);color:var(--ink)}
+.menu a.on{background:var(--bg2);color:var(--ink);font-weight:600}.menu a.on .i{color:var(--accent)}
+.side .bottom{margin-top:auto}.help{padding:20px;border-radius:16px;background:var(--bg)}.who{padding:0 12px}
+.main{flex:1;min-width:0;padding:40px 48px 56px;gap:32px}
+.kpi{padding:24px;gap:4px;flex:1}.kpi b{font-size:36px;font-weight:500;line-height:1.1;letter-spacing:-.03em}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;font-size:13px;font-weight:500;color:var(--muted);padding:14px 16px;border-bottom:1px solid var(--line)}
+td{padding:16px;border-bottom:1px solid var(--line);white-space:nowrap}
+td:nth-child(2){white-space:normal;min-width:150px}
+th:first-child,td:first-child{padding-left:24px}th:last-child,td:last-child{padding-right:24px}
+tr:last-child td{border-bottom:0}
+tbody tr{transition:background-color var(--out) var(--ease)}tbody tr:hover{background:rgba(51,32,42,.03)}
+.lesson{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;font-size:15px;transition:background-color var(--out) var(--ease)}
+.lesson:hover{background:rgba(51,32,42,.05)}.lesson.on{background:var(--bg2);font-weight:600}
+.dot{width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(51,32,42,.3);flex:none;display:flex;align-items:center;justify-content:center;color:#fff}
+.dot.done{background:var(--accent);border-color:var(--accent)}
+.mod{font-size:13px;font-weight:500;color:var(--muted);padding:20px 16px 8px}
+.topbar{height:72px;padding:0 40px;border-bottom:1px solid var(--line);background:#fff}
+.filerow{padding:16px 20px;gap:16px}
+.dash{border:1px dashed rgba(51,32,42,.3);justify-content:center;color:var(--accent);font-weight:600}
+
+/* Mobile */
+.m .h1{font-size:44px}.m .h2{font-size:34px}.m .h3{font-size:24px}.m .lead{font-size:17px}
+.m .btn{height:48px}
+.mnav{height:56px;padding:0 12px 0 20px;border-bottom:1px solid var(--line);background:var(--bg)}
+.m .logo{font-size:22px}
+.icb{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px}
+.icb.bd{border:1px solid rgba(51,32,42,.28);border-radius:50%;transition:background-color var(--out) var(--ease)}.icb.bd:hover{background:rgba(51,32,42,.06)}
+.msec{padding:72px 20px 40px;gap:24px}
+.tabbar{height:72px;border-top:1px solid var(--line);background:#fff;display:flex}
+.tabbar a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:13px;font-weight:500;color:var(--muted)}
+.tabbar a.on{color:var(--accent)}
+
+/* Movimento: entrada do hero (uma vez) + progresso; tudo o mais é hover/pressionado */
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes fill{from{transform:scaleX(0)}}
+@keyframes show{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:none}}
+html:not([data-motion=off]) .rise{animation:rise 620ms var(--ease) both;animation-delay:calc(var(--n,0)*110ms)}
+html:not([data-motion=off]) .hero .photo img{animation:show 900ms var(--ease) both}
+html:not([data-motion=off]) .bar i{animation:fill 900ms var(--ease) 200ms both}
+html[data-motion=off] .ul,html[data-motion=off] .go,html[data-motion=off] .links a{background:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:0s!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<!-- ============ D1 · LANDING ============ -->
+<article class="screen d" id="topo" aria-label="Landing desktop">
+  {{nav}}
+  <main id="conteudo">
+  <section class="hero row">
+    <div class="col g24 grow">
+      <h1 class="h1 rise">Extensão de cílios com técnica. <span>E ensinada do zero.</span></h1>
+      <p class="lead muted rise" style="--n:1">Atendimentos e curso profissional em Osasco-SP, com mais de 7&nbsp;anos realçando olhares e formando novas lash designers.</p>
+      <div class="row g12 rise" style="--n:2"><a class="btn pri lg" href="#curso">Conhecer o curso{{i:arrow-right,18}}</a><a class="btn sec lg" href="{{WA}}">{{i:whatsapp,18}}Agendar atendimento</a></div>
+      <div class="facts row rise" style="--n:3"><span>{{i:map-pin}}Osasco-SP</span><span>{{i:clock}}+7&nbsp;anos de experiência</span><span>{{i:award}}Curso com certificado</span></div>
+    </div>
+    <div class="photo"><img src="fotos/pdf-curso-p2-02.jpg" alt="Camilla Gama, lash designer" width="864" height="656" fetchpriority="high"></div>
+  </section>
+
+  <section class="sec alt row g48" id="sobre" style="align-items:center;gap:80px">
+    <div class="photo" style="width:480px;height:560px;flex:none"><img src="fotos/post-10.jpg" alt="Camilla entregando o certificado a uma aluna no estúdio" width="480" height="640" loading="lazy"></div>
+    <div class="col g24">
+      <h2 class="h2">Muito prazer, <span>eu sou a Camilla.</span></h2>
+      <p class="lead">Minha história na beleza começou aos 13&nbsp;anos, no meu primeiro curso de extensão de cílios. Desde então, nunca mais saí dessa área.</p>
+      <p class="muted" style="max-width:62ch">Sempre busquei uma profissão que me desse independência financeira, liberdade e a chance de ter o meu próprio negócio. Hoje, com 7&nbsp;anos de experiência, compartilho tudo o que aprendi para ajudar outras meninas a começarem essa jornada.</p>
+      <a class="go" href="https://www.instagram.com/camillagama_lash/" style="align-self:flex-start">{{i:instagram,18}}Acompanhe no Instagram{{i:arrow-right,18}}</a>
+    </div>
+  </section>
+
+  <section class="sec row" id="atendimentos" style="gap:80px;align-items:flex-start">
+    <div class="col grow">
+      <div class="head col"><h2 class="h2">Atendimentos <span>no estúdio</span></h2><p class="muted">Cada olhar pede um mapeamento. Você escolhe o efeito e eu cuido da saúde dos seus fios.</p></div>
+      <div class="svc row"><div class="ficon">{{i:eye}}</div><div class="col g8"><h3 class="h3">Extensão de cílios</h3><p class="muted">Fio a Fio, Volume Brasileiro, Volume Europeu (4D), Mega Europeu e Volume Marrom.</p></div></div>
+      <div class="svc row"><div class="ficon">{{i:pencil}}</div><div class="col g8"><h3 class="h3">Design de sobrancelhas</h3><p class="muted">Desenho sob medida para o formato do seu rosto.</p></div></div>
+      <div class="svc row"><div class="ficon">{{i:shield}}</div><div class="col g8"><h3 class="h3">Depilação</h3><p class="muted">Acabamento limpo, com biossegurança em cada etapa.</p></div></div>
+      <a class="btn pri" href="{{WA}}" style="align-self:flex-start;margin-top:32px">{{i:whatsapp,18}}Agendar no WhatsApp</a>
+    </div>
+    <div class="g2" style="width:560px;flex:none">
+      <figure class="col g12"><div class="photo arch" style="height:400px"><img src="fotos/pdf-curso-p6-04.jpg" alt="Olho com extensão de cílios em fio marrom" width="300" height="470" loading="lazy"></div><figcaption class="label">Fio marrom</figcaption></figure>
+      <figure class="col g12" style="margin-top:56px"><div class="photo arch" style="height:400px"><img src="fotos/pdf-curso-p7-05.jpg" alt="Olho com extensão de cílios em volume europeu" width="300" height="470" loading="lazy"></div><figcaption class="label">Volume europeu</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="sec alt row" id="curso" style="gap:80px;align-items:center">
+    <a class="photo" href="#pagina-curso" style="width:480px;height:600px;flex:none"><img src="fotos/pdf-curso-p3-03.jpg" alt="Extensão de cílios vista de perfil" width="681" height="1210" loading="lazy"></a>
+    <div class="col g24 grow">
+      <div class="row g8"><span class="tag">{{i:map-pin,14}}Presencial · Osasco-SP</span><span class="tag">{{i:video,14}}Online</span><span class="tag">Iniciante</span></div>
+      <h2 class="h2">Curso de Extensão de Cílios. <span>Do zero ao primeiro atendimento.</span></h2>
+      <p class="lead muted">Presencial ou online. No intensivo de 2&nbsp;dias em Osasco você treina e atende uma modelo real; no online, estuda pelas aulas gravadas, no seu ritmo.</p>
+      <div class="row g48 num"><div class="stat"><b>2</b><span>dias intensivos</span></div><div class="stat"><b>5</b><span>técnicas</span></div><div class="stat"><b>20</b><span>itens no kit</span></div></div>
+      <ul class="checks"><li>{{i:package}}Kit profissional com 20&nbsp;itens no presencial</li><li>{{i:book}}Apostila exclusiva com teoria e páginas de treino</li><li>{{i:award}}Certificado de conclusão</li></ul>
+      <div class="g2" style="padding-top:8px"><a class="card opt col g12" href="#inscricao"><span class="row g8 label">{{i:map-pin,16}}Presencial · 2&nbsp;dias em Osasco-SP</span><span class="col g8"><span class="row g8"><s class="was num"><span class="skip">Preço anterior: </span>R$&nbsp;1.200</s><span class="tag off">−17%</span></span><span><span class="price num">R$&nbsp;1.000</span> <span class="muted small">à vista ou em até 12x</span></span></span><span class="go" style="align-self:flex-start">Quero me inscrever{{i:arrow-right,18}}</span></a><a class="card opt col g12" href="#inscricao-online"><span class="row g8 label">{{i:video,16}}Online · aulas gravadas</span><span class="muted" style="line-height:28px">Valor sob consulta</span><span class="go" style="align-self:flex-start">Quero me inscrever{{i:arrow-right,18}}</span></a></div>
+      <a class="go" href="#catalogo" style="align-self:flex-start">Ver também o curso de Design de Sobrancelhas{{i:arrow-right,18}}</a>
+    </div>
+  </section>
+
+  <section class="sec row" id="materiais" style="gap:80px;align-items:center">
+    <div class="col g24 grow">
+      <span class="tag" style="align-self:flex-start">{{i:file,14}}Apostila · PDF · 30&nbsp;páginas</span>
+      <h2 class="h2">Apostila Profissional. <span>Toda a teoria para ler e reler.</span></h2>
+      <p class="lead muted">O conteúdo teórico de extensão de cílios em um material só, vendido separado dos cursos.</p>
+      <ul class="checks"><li>{{i:check}}Biossegurança e higienização</li><li>{{i:check}}Tufo, tela e extensão: as diferenças</li><li>{{i:check}}Tipos de técnicas e de fios</li><li>{{i:check}}Ciclo de vida dos cílios</li></ul>
+      <div class="row g24" style="padding-top:8px"><a class="btn pri lg" href="#apostila">Quero a apostila</a><span class="muted small">Valor sob consulta</span></div>
+    </div>
+    <a class="photo" href="#apostila" style="width:420px;height:594px;flex:none"><img src="fotos/pdf-apostila-p1-07.jpg" alt="Capa da apostila profissional de extensão de cílios" width="1131" height="1600" loading="lazy"></a>
+  </section>
+
+  <section class="sec deep" style="padding-bottom:120px">
+    <div class="head col"><h2 class="h2">Da inscrição à sua vaga em três passos</h2></div>
+    <div class="g3">
+      <div class="step col"><div class="ficon">{{i:pencil}}</div><h3 class="h3">Faça sua inscrição</h3><p class="muted">Preencha seus dados e crie sua conta. Leva menos de um minuto.</p></div>
+      <div class="step col"><div class="ficon">{{i:whatsapp}}</div><h3 class="h3">Combine o pagamento</h3><p class="muted">Você fala comigo no WhatsApp e escolhe Pix ou cartão.</p></div>
+      <div class="step col"><div class="ficon">{{i:lock}}</div><h3 class="h3">Receba seu acesso</h3><p class="muted">Vaga confirmada e apostila liberada na sua área de aluna.</p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="resultados">
+    <div class="row between" style="align-items:flex-end;margin-bottom:48px"><h2 class="h2">Resultados <span>de quem passou por aqui</span></h2><a class="go" href="https://www.instagram.com/camillagama_lash/">{{i:instagram,18}}Ver mais no Instagram{{i:arrow-right,18}}</a></div>
+    <div class="gal">
+      <div class="photo"><img src="fotos/post-02.jpg" alt="Cliente com extensão de cílios" width="481" height="640" loading="lazy"></div>
+      <div class="photo"><img src="fotos/post-11.jpg" alt="Olho verde com extensão de cílios em volume" width="360" height="640" loading="lazy"></div>
+      <div class="photo"><img src="fotos/post-05.jpg" alt="Cliente com cílios e sobrancelhas feitos" width="480" height="640" loading="lazy"></div>
+      <div class="photo"><img src="fotos/post-07.jpg" alt="Cliente com extensão de cílios" width="360" height="640" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="sec row" id="duvidas" style="gap:96px;align-items:flex-start;padding-top:48px">
+    <h2 class="h2" style="width:380px;flex:none">Dúvidas <span>frequentes</span></h2>
+    <div class="grow">
+      <details open><summary>Como faço o pagamento?{{i:chevron}}</summary><p>Depois da inscrição, você combina direto comigo pelo WhatsApp: R$&nbsp;1.000 à vista ou em até 12x no cartão, com a taxa da maquininha.</p></details>
+      <details><summary>O curso é presencial ou online?{{i:chevron}}</summary><p>Os dois. O presencial é um intensivo de 2&nbsp;dias em Osasco-SP, com kit e prática em modelo. O online tem as mesmas técnicas em aulas gravadas, com apostila e certificado.</p></details>
+      <details><summary>Preciso ter experiência?{{i:chevron}}</summary><p>Não. O curso é para iniciantes e começa do zero.</p></details>
+      <details><summary>O que está incluso no curso?{{i:chevron}}</summary><p>Kit profissional com 20&nbsp;itens, apostila exclusiva e certificado de conclusão.</p></details>
+      <details><summary>Vou praticar em modelo?{{i:chevron}}</summary><p>Sim. No segundo dia você faz uma aplicação completa em modelo real, com o meu acompanhamento.</p></details>
+    </div>
+  </section>
+
+  <section class="close alt row">
+    <img class="round" src="fotos/pdf-curso-p10-06.jpg" alt="Camilla Gama sorrindo" width="360" height="360" loading="lazy">
+    <div class="col g24"><h2 class="h2">Vamos começar essa jornada juntas?</h2><div class="row g16"><a class="btn pri lg" href="{{WA}}">{{i:whatsapp,18}}Chamar no WhatsApp</a><span class="muted num">(11)&nbsp;94769-2668</span></div></div>
+  </section>
+  </main>
+  <div class="wrap">{{foot}}</div>
+</article>
+
+<!-- ============ D2 · CATÁLOGO ============ -->
+<article class="screen d" aria-label="Catálogo desktop">
+  {{nav}}
+  <div class="col" style="padding:72px 80px 96px">
+    <div class="col g16"><h1 class="h1">Cursos e apostilas</h1><p class="lead muted">Você pede por aqui, combina o pagamento no WhatsApp e recebe o acesso na sua área de aluna.</p></div>
+    <nav class="row g8" aria-label="Seções do catálogo" style="padding:32px 0 48px"><a class="tag lk" href="#cat-presencial">{{i:map-pin,14}}Cursos presenciais · 2</a><a class="tag lk" href="#cat-online">{{i:video,14}}Cursos online · 1</a><a class="tag lk" href="#cat-apostilas">{{i:file,14}}Apostilas · 1</a></nav>
+    <section class="cat row" id="cat-presencial"><div class="col g12" style="width:300px;flex:none"><h2 class="h2" style="font-size:40px">Cursos presenciais</h2><p class="muted">Em Osasco-SP, com kit, prática e acompanhamento de perto.</p></div><div class="g2 grow"><a class="card prod col" href="#pagina-curso"><div class="photo"><img src="fotos/pdf-curso-p3-03.jpg" alt="Extensão de cílios vista de perfil" width="480" height="640" style="object-position:50% 35%"></div><div class="b col"><span class="tag" style="align-self:flex-start">{{i:map-pin,14}}Presencial · 2&nbsp;dias</span><h3 class="h3">Extensão de Cílios — Iniciante</h3><p class="muted">Cinco técnicas, kit com 20&nbsp;itens, apostila e certificado.</p><div class="row between" style="padding-top:8px"><span class="col g8"><span class="row g8"><s class="was num"><span class="skip">Preço anterior: </span>R$&nbsp;1.200</s><span class="tag off">−17%</span></span><span class="price num">R$&nbsp;1.000</span></span><span class="btn pri">Quero me inscrever</span></div></div></a><a class="card prod col" href="{{WA}}"><div class="photo"><img src="fotos/post-12.jpg" alt="Cliente com sobrancelhas desenhadas" width="480" height="640" style="object-position:50% 20%"></div><div class="b col"><span class="tag" style="align-self:flex-start">{{i:map-pin,14}}Presencial</span><h3 class="h3">Design de Sobrancelhas</h3><p class="muted">Próximas turmas sob consulta.</p><div class="row between" style="padding-top:8px"><span class="muted small">Valor sob consulta</span><span class="btn sec">{{i:whatsapp,18}}Consultar datas</span></div></div></a></div></section>
+    <section class="cat row" id="cat-online"><div class="col g12" style="width:300px;flex:none"><h2 class="h2" style="font-size:40px">Cursos online</h2><p class="muted">Aulas gravadas para assistir no seu ritmo, com apostila e certificado.</p></div><div class="g2 grow"><a class="card prod col" href="#pagina-curso-online"><div class="photo"><img src="fotos/post-04.jpg" alt="Cílios com extensão em volume" width="480" height="640" style="object-position:50% 40%"></div><div class="b col"><span class="tag" style="align-self:flex-start">{{i:video,14}}Online · aulas gravadas</span><h3 class="h3">Extensão de Cílios — Iniciante</h3><p class="muted">As cinco técnicas, da biossegurança ao volume marrom.</p><div class="row between" style="padding-top:8px"><span class="muted small">Valor sob consulta</span><span class="btn pri">Quero me inscrever</span></div></div></a></div></section>
+    <section class="cat row" id="cat-apostilas"><div class="col g12" style="width:300px;flex:none"><h2 class="h2" style="font-size:40px">Apostilas</h2><p class="muted">Material em PDF para ler, reler e treinar.</p></div><div class="g2 grow"><a class="card prod col" href="#apostila"><div class="photo"><img src="fotos/pdf-apostila-p1-07.jpg" alt="Capa da apostila profissional de extensão de cílios" width="480" height="640" style="object-position:50% 18%"></div><div class="b col"><span class="tag" style="align-self:flex-start">{{i:file,14}}PDF · 30&nbsp;páginas</span><h3 class="h3">Apostila Profissional de Extensão de Cílios</h3><p class="muted">Todo o conteúdo teórico do curso em um material só.</p><div class="row between" style="padding-top:8px"><span class="muted small">Valor sob consulta</span><span class="btn pri">Quero comprar</span></div></div></a></div></section>
+  </div>
+  <div class="wrap">{{foot}}</div>
+</article>
+
+<!-- ============ D3 · PÁGINA DO CURSO ============ -->
+<article class="screen d" aria-label="Página do curso desktop">
+  {{nav}}
+  <div class="row" style="padding:56px 80px 96px;gap:64px;align-items:flex-start">
+    <div class="col g32 grow">
+      <nav class="small muted" aria-label="Você está em"><a class="ul" href="#catalogo">Cursos</a> / Extensão de Cílios — Iniciante</nav>
+      <div class="col g16"><div class="row g8"><span class="tag">{{i:map-pin,14}}Presencial · Osasco-SP</span><span class="tag">{{i:video,14}}Online</span><span class="tag">Iniciante</span></div>
+      <h1 class="h1">Curso de Extensão de Cílios</h1>
+      <p class="lead muted">Um intensivo de 2&nbsp;dias para entrar no mercado com segurança: teoria, treino e prática com modelo real.</p></div>
+      <div class="facts row" style="padding-top:0;border:0"><span>{{i:calendar}}2&nbsp;dias intensivos</span><span>{{i:eye}}5&nbsp;técnicas</span><span>{{i:package}}Kit com 20&nbsp;itens</span><span>{{i:award}}Certificado</span></div>
+      <div class="photo" style="height:420px"><img src="fotos/post-10.jpg" alt="Camilla e uma aluna com o certificado do curso" width="480" height="640" style="object-position:50% 30%"></div>
+      <h2 class="h2" style="padding-top:24px">Seu passo a passo em 2&nbsp;dias</h2>
+      <div class="g2">
+        <div class="card col g16" style="padding:28px"><span class="tag" style="align-self:flex-start">Dia 1</span><h3 class="h3">Teoria e treinamento</h3><ul class="checks"><li>{{i:check}}Preparação e higienização dos cílios naturais</li><li>{{i:check}}Materiais e instrumentos</li><li>{{i:check}}Mapeamento e escolha dos fios</li><li>{{i:check}}Segredos para maior durabilidade</li><li>{{i:check}}Acoplamento e isolamento</li><li>{{i:check}}Direcionamento correto dos fios</li><li>{{i:check}}Treino no copo, boneca e esponja</li></ul></div>
+        <div class="card col g16" style="padding:28px"><span class="tag" style="align-self:flex-start">Dia 2</span><h3 class="h3">Prática com modelo</h3><ul class="checks"><li>{{i:check}}Preparação da modelo e análise do olhar</li><li>{{i:check}}Aplicação completa em modelo real, com acompanhamento</li><li>{{i:check}}Correções e dicas para resultados de excelência</li><li>{{i:check}}Finalização, cuidados e manutenção</li></ul></div>
+      </div>
+      <h2 class="h2" style="padding-top:24px">Técnicas que você vai aprender</h2>
+      <div class="row g8" style="flex-wrap:wrap"><span class="tag">Fio a Fio</span><span class="tag">Volume Brasileiro</span><span class="tag">Volume Europeu (4D)</span><span class="tag">Volume Mega Europeu</span><span class="tag">Volume Marrom</span></div>
+      <h2 class="h2" style="padding-top:24px">Kit profissional <span>com 20&nbsp;itens</span></h2>
+      <ul class="checks" style="columns:2;column-gap:48px"><li>{{i:check}}Pinça de isolamento</li><li>{{i:check}}Pinça de precisão</li><li>{{i:check}}Esponjas para treino</li><li>{{i:check}}Pump espumador</li><li>{{i:check}}Pump para enxágue</li><li>{{i:check}}Fitas micropore</li><li>{{i:check}}Fita transpore</li><li>{{i:check}}Cola profissional</li><li>{{i:check}}Higienizador de cílios</li><li>{{i:check}}Mini ventilador portátil</li><li>{{i:check}}Caneta marcadora</li><li>{{i:check}}Caixa de cílios 4D</li><li>{{i:check}}Caixa de cílios Y</li><li>{{i:check}}Escovinhas para cílios</li><li>{{i:check}}Microbrush</li><li>{{i:check}}Florzinha para cola</li><li>{{i:check}}Pads em gel</li><li>{{i:check}}Higrômetro</li><li>{{i:check}}Máscaras descartáveis</li><li>{{i:check}}Toucas descartáveis</li></ul>
+    </div>
+    <aside class="card col g16" style="width:400px;flex:none;padding:32px" aria-label="Investimento">
+      <div class="seg row" role="group" aria-label="Formato do curso"><button type="button" class="on" aria-pressed="true">{{i:map-pin,16}}Presencial</button><button type="button" aria-pressed="false">{{i:video,16}}Online</button></div>
+      <span class="label">Investimento · presencial</span>
+      <div class="col g8"><span class="row g8"><s class="was num"><span class="skip">Preço anterior: </span>R$&nbsp;1.200</s><span class="tag off">−17%</span></span><div><span class="price num" style="font-size:48px">R$&nbsp;1.000</span> <span class="muted small">à vista</span></div></div>
+      <p class="muted small">Ou em até 12x no cartão, com a taxa da maquininha. O pagamento é combinado pelo WhatsApp.</p>
+      <a class="btn pri lg full" href="#inscricao">Quero me inscrever</a>
+      <a class="btn sec lg full" href="{{WA}}">{{i:whatsapp,18}}Tirar dúvidas</a>
+      <ul class="checks small" style="padding-top:16px;border-top:1px solid var(--line)"><li>{{i:package,18}}Kit completo com 20&nbsp;itens</li><li>{{i:book,18}}Apostila exclusiva</li><li>{{i:award,18}}Certificado de conclusão</li><li>{{i:users,18}}Prática com modelo real</li></ul>
+    </aside>
+  </div>
+  <div class="wrap">{{foot}}</div>
+</article>
+
+<!-- ============ D4 · ALUNA: MEUS CURSOS ============ -->
+<article class="screen d" aria-label="Área da aluna, meus cursos">
+  <div class="app">
+    {{sideAluna:cursos}}
+    <div class="main col">
+      <div class="row between"><div class="col"><h1 class="h2">Olá, Ana</h1><span class="muted">Continue de onde você parou.</span></div><div class="row g12"><div class="col" style="align-items:flex-end"><b class="small">Ana Souza</b><span class="muted small">Aluna</span></div><div class="ini" aria-hidden="true">AS</div></div></div>
+      <div class="card row" style="overflow:hidden">
+        <div class="photo dim" style="width:380px;height:250px;flex:none;border-radius:0"><img src="fotos/pdf-curso-p3-03.jpg" alt="" width="681" height="1210"><a class="play" href="#aula" aria-label="Continuar a aula">{{i:play,22}}</a></div>
+        <div class="col g12 grow" style="padding:32px"><span class="label">Continuar assistindo · online</span><h2 class="h3" style="font-size:34px">Extensão de Cílios — Iniciante</h2><span class="muted">Fundamentos · Ciclo de vida dos cílios</span><div class="row g16"><div class="bar grow" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do curso"><i style="--p:.33"></i></div><b class="small num">4 de 12 aulas</b></div><a class="btn pri" href="#aula" style="align-self:flex-start;margin-top:4px">{{i:play,16}}Continuar aula</a></div>
+      </div>
+      <h2 class="h3">Meus cursos</h2>
+      <div class="g3">
+        <a class="card prod col" href="#aula"><div class="photo" style="aspect-ratio:16/9"><img src="fotos/pdf-curso-p3-03.jpg" alt="" width="681" height="1210" style="object-position:50% 35%"></div><div class="b col" style="padding:20px"><span class="tag ok" style="align-self:flex-start">{{i:check,14}}Liberado</span><h3 class="h3" style="font-size:24px">Extensão de Cílios — Iniciante</h3><div class="row g12"><div class="bar grow"><i style="--p:.33"></i></div><span class="small num">33%</span></div></div></a>
+        <div class="card prod col"><div class="photo" style="aspect-ratio:16/9"><img src="fotos/post-12.jpg" alt="" width="480" height="640" style="object-position:50% 20%"></div><div class="b col" style="padding:20px"><span class="tag warn" style="align-self:flex-start">{{i:clock,14}}Aguardando confirmação</span><h3 class="h3" style="font-size:24px">Design de Sobrancelhas</h3><a class="go small" href="{{WA}}" style="align-self:flex-start">{{i:whatsapp,16}}Combinar pagamento</a></div></div>
+      </div>
+      <h2 class="h3">Turma presencial</h2>
+      <div class="card filerow row"><div class="ficon">{{i:calendar}}</div><div class="col grow"><b>Extensão de Cílios · 2&nbsp;dias em Osasco-SP</b><span class="muted small">A data é combinada com a Camilla pelo WhatsApp.</span></div><a class="btn sec" href="{{WA}}">{{i:whatsapp,18}}Combinar data</a></div>
+      <h2 class="h3">Minhas apostilas</h2>
+      <div class="card filerow row"><div class="ficon">{{i:file}}</div><div class="col grow"><b>Apostila Profissional de Extensão de Cílios</b><span class="muted small">PDF · 30&nbsp;páginas · 23,6&nbsp;MB</span></div><a class="btn sec" href="#baixar">{{i:download,18}}Baixar</a></div>
+    </div>
+  </div>
+</article>
+
+<!-- ============ D5 · ALUNA: AULA ============ -->
+<article class="screen d" aria-label="Área da aluna, aula">
+  <div class="topbar row between"><div class="row g24"><a class="go" href="#cursos" style="color:var(--muted)">{{i:arrow-left,18}}Meus cursos</a><b>Extensão de Cílios — Iniciante</b></div><div class="row g16" style="width:340px"><div class="bar grow"><i style="--p:.33"></i></div><span class="small num">4 de 12</span><div class="ini" aria-hidden="true">AS</div></div></div>
+  <div class="row" style="align-items:stretch">
+    <div class="col g24 grow" style="padding:40px 48px 64px">
+      <div class="photo dim" style="height:540px"><img src="fotos/post-04.jpg" alt="" width="480" height="640" style="object-position:50% 40%"><button class="play" type="button" aria-label="Reproduzir aula">{{i:play,22}}</button></div>
+      <div class="row between" style="align-items:flex-start;gap:32px"><div class="col g8"><span class="label">Fundamentos · Aula 4</span><h1 class="h2">Ciclo de vida dos cílios</h1></div><div class="row g12"><a class="btn sec" href="#anterior">{{i:arrow-left,18}}Anterior</a><button class="btn pri" type="button">{{i:check,18}}Marcar como concluída</button></div></div>
+      <p class="muted" style="max-width:62ch">Os fios passam pelas fases anágena, catágena e telógena, e perdemos naturalmente de 3 a 5 por dia. Entender esse ciclo explica por que as manutenções são necessárias e por que cada cliente tem o seu tempo.</p>
+      <div class="col g12"><h2 class="h3">Materiais da aula</h2><div class="card filerow row"><div class="ficon">{{i:file}}</div><div class="col grow"><b>Apostila — página 8: ciclo de vida dos cílios</b><span class="muted small">PDF</span></div><a class="btn sec" href="#baixar">{{i:download,18}}Baixar</a></div></div>
+    </div>
+    <nav class="col" style="width:400px;flex:none;border-left:1px solid var(--line);background:#fff;padding:24px 16px" aria-label="Conteúdo do curso">
+      <b style="padding:0 16px;font-size:17px">Conteúdo do curso</b>
+      <div class="mod">Fundamentos</div>
+      <a class="lesson" href="#a1"><span class="dot done">{{i:check,14}}</span>Biossegurança</a>
+      <a class="lesson" href="#a2"><span class="dot done">{{i:check,14}}</span>Tufo, tela e extensão</a>
+      <a class="lesson" href="#a3"><span class="dot done">{{i:check,14}}</span>Tipos de técnicas</a>
+      <a class="lesson on" href="#a4" aria-current="true"><span class="dot"></span>Ciclo de vida dos cílios</a>
+      <div class="mod">Técnicas</div>
+      <a class="lesson" href="#a5"><span class="dot"></span>Fio a Fio</a>
+      <a class="lesson" href="#a6"><span class="dot"></span>Volume Brasileiro</a>
+      <a class="lesson" href="#a7"><span class="dot"></span>Volume Europeu (4D)</a>
+      <a class="lesson" href="#a8"><span class="dot"></span>Volume Mega Europeu</a>
+      <a class="lesson" href="#a9"><span class="dot"></span>Volume Marrom</a>
+      <div class="mod">Prática</div>
+      <a class="lesson" href="#a10"><span class="dot"></span>Mapeamento e escolha dos fios</a>
+      <a class="lesson" href="#a11"><span class="dot"></span>Acoplamento e isolamento</a>
+      <a class="lesson" href="#a12"><span class="dot"></span>Direcionamento dos fios</a>
+    </nav>
+  </div>
+</article>
+
+<!-- ============ D6 · ADMIN: PEDIDOS ============ -->
+<article class="screen d" aria-label="Painel, pedidos de inscrição">
+  <div class="app">
+    {{sideAdmin:pedidos}}
+    <div class="main col">
+      <div class="row between"><div class="col"><h1 class="h2">Pedidos de inscrição</h1><span class="muted">Libere o acesso depois de confirmar o pagamento no WhatsApp.</span></div><button class="btn pri" type="button">{{i:plus,18}}Liberar para uma aluna</button></div>
+      <div class="row g24">
+        <div class="card kpi col"><span class="label">Aguardando liberação</span><b class="num">3</b></div>
+        <div class="card kpi col"><span class="label">Liberados este mês</span><b class="num">8</b></div>
+        <div class="card kpi col"><span class="label">Alunas ativas</span><b class="num">24</b></div>
+        <div class="card kpi col"><span class="label">Itens no catálogo</span><b class="num">3</b></div>
+      </div>
+      <div class="row between"><div class="row g8" role="group" aria-label="Filtrar por status"><button class="tag on" type="button" aria-pressed="true">Pendentes · 3</button><button class="tag" type="button" aria-pressed="false">Liberados</button><button class="tag" type="button" aria-pressed="false">Cancelados</button><button class="tag" type="button" aria-pressed="false">Todos</button></div>
+        <div class="find" style="width:320px;position:relative"><label for="busca" class="skip">Buscar pedido</label><input id="busca" type="search" name="busca" autocomplete="off" placeholder="Buscar por nome ou WhatsApp…" style="height:44px;padding-left:44px"><span style="position:absolute;left:14px;top:12px;color:var(--muted)">{{i:search}}</span></div></div>
+      <div class="card" style="overflow:hidden">
+        <table>
+          <thead><tr><th scope="col">Aluna</th><th scope="col">Item</th><th scope="col">WhatsApp</th><th scope="col">Pedido em</th><th scope="col">Status</th><th scope="col"><span class="skip">Ações</span></th></tr></thead>
+          <tbody>
+          <tr><td><div class="row g12"><div class="ini" aria-hidden="true">AS</div><div class="col"><b>Ana Souza</b><span class="muted small">ana@exemplo.com</span></div></div></td><td>Design de Sobrancelhas</td><td class="num">(11)&nbsp;90000-0001</td><td class="num">Hoje, 14:20</td><td><span class="tag warn">Pendente</span></td><td><div class="row g8" style="justify-content:flex-end"><a class="icb bd" href="#wa" aria-label="Conversar no WhatsApp">{{i:whatsapp}}</a><button class="btn pri" type="button">Liberar acesso</button></div></td></tr>
+          <tr><td><div class="row g12"><div class="ini" aria-hidden="true">BL</div><div class="col"><b>Bruna Lima</b><span class="muted small">bruna@exemplo.com</span></div></div></td><td>Extensão de Cílios — Presencial</td><td class="num">(11)&nbsp;90000-0002</td><td class="num">Hoje, 10:05</td><td><span class="tag warn">Pendente</span></td><td><div class="row g8" style="justify-content:flex-end"><a class="icb bd" href="#wa" aria-label="Conversar no WhatsApp">{{i:whatsapp}}</a><button class="btn pri" type="button">Liberar acesso</button></div></td></tr>
+          <tr><td><div class="row g12"><div class="ini" aria-hidden="true">LA</div><div class="col"><b>Larissa Alves</b><span class="muted small">larissa@exemplo.com</span></div></div></td><td>Apostila Profissional</td><td class="num">(11)&nbsp;90000-0003</td><td class="num">Ontem, 19:42</td><td><span class="tag warn">Pendente</span></td><td><div class="row g8" style="justify-content:flex-end"><a class="icb bd" href="#wa" aria-label="Conversar no WhatsApp">{{i:whatsapp}}</a><button class="btn pri" type="button">Liberar acesso</button></div></td></tr>
+          <tr><td><div class="row g12"><div class="ini" aria-hidden="true">PS</div><div class="col"><b>Patrícia Santos</b><span class="muted small">patricia@exemplo.com</span></div></div></td><td>Extensão de Cílios — Online</td><td class="num">(11)&nbsp;90000-0004</td><td class="num">9 de nov., 16:30</td><td><span class="tag ok">{{i:check,14}}Liberado</span></td><td><div class="row g8" style="justify-content:flex-end"><a class="btn sec" href="#aluna">Ver aluna</a></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ============ D7 · ADMIN: EDITAR CURSO ============ -->
+<article class="screen d" aria-label="Painel, editar curso">
+  <div class="app">
+    {{sideAdmin:cursos}}
+    <form class="main col" action="#salvar">
+      <div class="row between"><div class="col"><nav class="small muted" aria-label="Você está em"><a class="ul" href="#cursos">Cursos e materiais</a> / Editar</nav><h1 class="h2">Extensão de Cílios — Iniciante</h1></div><div class="row g12"><span class="tag ok">{{i:check,14}}Publicado</span><a class="btn sec" href="#ver">{{i:eye,18}}Ver página</a><button class="btn pri" type="submit">Salvar alterações</button></div></div>
+      <div class="row g24" style="align-items:flex-start">
+        <div class="card col g16" style="width:420px;flex:none;padding:28px">
+          <h2 class="h3">Informações</h2>
+          <div class="photo" style="height:180px"><img src="fotos/pdf-curso-p3-03.jpg" alt="Capa atual do curso" width="681" height="1210" style="object-position:50% 35%"></div>
+          <button class="btn sec" type="button" style="align-self:flex-start">{{i:image,18}}Trocar capa</button>
+          <div class="field"><label for="c-titulo">Título</label><input id="c-titulo" name="titulo" type="text" autocomplete="off" value="Extensão de Cílios — Iniciante"></div>
+          <div class="row g16"><div class="field grow"><label for="c-tipo">Formatos</label><input id="c-tipo" name="tipo" type="text" autocomplete="off" value="Presencial e online"></div><div class="field grow"><label for="c-area">Área</label><input id="c-area" name="area" type="text" autocomplete="off" value="Cílios"></div></div>
+          <div class="row g16"><div class="field grow"><label for="c-preco">Preço atual</label><input id="c-preco" name="preco" type="text" inputmode="decimal" autocomplete="off" value="R$ 1.000,00"></div><div class="field grow"><label for="c-preco-de">Preço original <span class="muted" style="font-weight:400">(opcional)</span></label><input id="c-preco-de" name="precoOriginal" type="text" inputmode="decimal" autocomplete="off" value="R$ 1.200,00" aria-describedby="c-preco-dica"></div></div>
+          <div class="col g8" id="c-preco-dica" style="padding:14px 16px;border-radius:12px;background:var(--bg)"><span class="label">Como aparece no site</span><div class="row g12"><span class="row g8"><s class="was num"><span class="skip">Preço anterior: </span>R$&nbsp;1.200</s><span class="tag off">−17%</span></span><span class="price num" style="font-size:22px">R$&nbsp;1.000</span></div><span class="muted small">Deixe o preço original em branco para mostrar só o preço atual.</span></div>
+          <div class="field"><label for="c-acesso">Acesso às aulas</label><input id="c-acesso" name="acesso" type="text" autocomplete="off" value="12 meses"></div>
+          <div class="field"><label for="c-desc">Descrição</label><textarea id="c-desc" name="descricao">Intensivo de 2 dias: teoria, treino e prática com modelo real.</textarea></div>
+        </div>
+        <div class="col g16 grow">
+          <div class="row between"><h2 class="h3">Módulos e aulas</h2><button class="btn sec" type="button">{{i:plus,18}}Novo módulo</button></div>
+          <div class="card col g8" style="padding:16px">
+            <div class="row between" style="padding:8px"><b class="row g8"><span class="muted">{{i:grip,18}}</span>Fundamentos</b><span class="muted small">4 aulas</span></div>
+            <div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span>Biossegurança<span class="muted small row g8" style="margin-left:auto">{{i:video,16}}Vídeo enviado</span></div>
+            <div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span>Tufo, tela e extensão<span class="muted small row g8" style="margin-left:auto">{{i:video,16}}Vídeo enviado</span></div>
+            <div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span>Tipos de técnicas<span class="muted small row g8" style="margin-left:auto">{{i:video,16}}Vídeo enviado</span></div>
+            <div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span>Ciclo de vida dos cílios<span class="muted small row g8" style="margin-left:auto">{{i:file,16}}Vídeo + 1 PDF</span></div>
+            <button class="lesson dash" type="button">{{i:plus,18}}Adicionar aula</button>
+          </div>
+          <div class="card col g8" style="padding:16px">
+            <div class="row between" style="padding:8px"><b class="row g8"><span class="muted">{{i:grip,18}}</span>Técnicas</b><span class="muted small">5 aulas</span></div>
+            <div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span>Fio a Fio<span class="muted small row g8" style="margin-left:auto">{{i:video,16}}Vídeo enviado</span></div>
+            <div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span>Volume Brasileiro<span class="muted small row g8" style="margin-left:auto">{{i:video,16}}Vídeo enviado</span></div>
+            <div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span>Volume Europeu (4D)<span class="tag warn" style="margin-left:auto">Sem vídeo</span></div>
+            <button class="lesson dash" type="button">{{i:plus,18}}Adicionar aula</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</article>
+
+<!-- ============ D8 · INSCRIÇÃO ============ -->
+<article class="screen d" aria-label="Inscrição desktop">
+  <header class="nav"><div class="row between wrap"><a class="logo" href="#topo" translate="no">Camilla <span>Lash</span></a><span class="muted small">Já tem conta? <a class="ul" href="#entrar" style="color:var(--accent);font-weight:600">Entrar</a></span></div></header>
+  <div class="row" style="padding:72px 80px 96px;gap:96px;align-items:flex-start">
+    <form class="col g24 grow" action="#enviar" style="max-width:600px">
+      <a class="go" href="#voltar" style="align-self:flex-start;color:var(--muted)">{{i:arrow-left,18}}Voltar para o curso</a>
+      <div class="col g12"><h1 class="h1" style="font-size:56px">Seus dados</h1><p class="lead muted">Leva menos de um minuto. O pagamento é combinado depois, pelo WhatsApp.</p></div>
+      <div class="field"><label for="d-nome">Nome completo</label><input id="d-nome" name="nome" type="text" autocomplete="name" value="Ana Souza"></div>
+      <div class="row g16"><div class="field grow"><label for="d-zap">WhatsApp</label><input id="d-zap" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" value="(11) 90000-0001"></div><div class="field grow"><label for="d-email">E-mail</label><input id="d-email" name="email" type="email" autocomplete="email" spellcheck="false" placeholder="voce@exemplo.com…"></div></div>
+      <div class="field"><label for="d-senha">Crie uma senha</label><input id="d-senha" name="senha" type="password" autocomplete="new-password" placeholder="Mínimo de 8 caracteres…"></div>
+      <button class="btn pri lg" type="submit" style="align-self:flex-start">Enviar inscrição{{i:arrow-right,18}}</button>
+    </form>
+    <aside class="card col" style="width:480px;flex:none;overflow:hidden" aria-label="Resumo da inscrição">
+      <div class="photo" style="height:220px;border-radius:0"><img src="fotos/pdf-curso-p3-03.jpg" alt="" width="681" height="1210" style="object-position:50% 35%"></div>
+      <div class="col g16" style="padding:28px">
+        <span class="label">Você está se inscrevendo em</span>
+        <h2 class="h3" style="font-size:32px">Extensão de Cílios — Iniciante</h2>
+        <div class="row g8"><span class="tag">{{i:map-pin,14}}Presencial · 2&nbsp;dias em Osasco-SP</span></div>
+        <div class="col g8" style="padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><span class="row g8"><s class="was num"><span class="skip">Preço anterior: </span>R$&nbsp;1.200</s><span class="tag off">−17%</span></span><div><span class="price num" style="font-size:36px">R$&nbsp;1.000</span> <span class="muted small">à vista ou em até 12x</span></div></div>
+        <ul class="checks small"><li>{{i:package,18}}Kit completo com 20&nbsp;itens</li><li>{{i:book,18}}Apostila exclusiva</li><li>{{i:award,18}}Certificado de conclusão</li></ul>
+        <p class="muted small row g8" style="align-items:flex-start">{{i:whatsapp,18}}<span>Depois de enviar, você fala com a Camilla no WhatsApp para combinar o pagamento.</span></p>
+      </div>
+    </aside>
+  </div>
+</article>
+
+<!-- ============ D9 · PEDIDO ENVIADO ============ -->
+<article class="screen d" aria-label="Pedido enviado desktop">
+  <header class="nav"><div class="row between wrap"><a class="logo" href="#topo" translate="no">Camilla <span>Lash</span></a><a class="btn sec" href="#aluna">{{i:user,18}}Área da aluna</a></div></header>
+  <div class="col g32" style="padding:96px 80px 120px;align-items:center;text-align:center">
+    <div class="ficon" style="width:88px;height:88px;border-radius:50%;background:var(--okbg);color:var(--ok)">{{i:check,40}}</div>
+    <div class="col g16" style="align-items:center"><h1 class="h1" style="font-size:56px">Inscrição recebida</h1><p class="lead muted" style="max-width:52ch">Falta um passo: fale com a Camilla no WhatsApp para combinar o pagamento. Assim que confirmar, seu acesso é liberado.</p></div>
+    <dl class="card col g16" style="padding:28px;width:560px;text-align:left">
+      <div class="row between"><dt class="muted">Curso</dt><dd><b>Extensão de Cílios — Iniciante</b></dd></div>
+      <div class="row between"><dt class="muted">Formato</dt><dd>Presencial · 2&nbsp;dias em Osasco-SP</dd></div>
+      <div class="row between"><dt class="muted">Valor</dt><dd class="num"><b>R$&nbsp;1.000</b></dd></div>
+      <div class="row between"><dt class="muted">Status</dt><dd><span class="tag warn">{{i:clock,14}}Aguardando confirmação</span></dd></div>
+    </dl>
+    <div class="row g12"><a class="btn pri lg" href="{{WA}}">{{i:whatsapp,18}}Continuar no WhatsApp</a><a class="btn sec lg" href="#aluna">Ir para a área da aluna</a></div>
+  </div>
+</article>
+
+<!-- ============ D10 · ENTRAR ============ -->
+<article class="screen d" aria-label="Entrar desktop">
+  <div class="row" style="align-items:stretch;min-height:900px">
+    <div class="col alt grow" style="align-items:center;justify-content:center;gap:16px;padding:80px">
+      <a class="logo" href="#topo" translate="no" style="font-size:88px">Camilla <span>Lash</span></a>
+      <span class="muted" style="font-size:19px">Lash designer · Osasco-SP</span>
+    </div>
+    <div class="col" style="width:640px;flex:none;justify-content:center;padding:80px 110px">
+      <form class="col g24" action="#entrar">
+        <div class="col g12"><h1 class="h1" style="font-size:52px">Área da aluna</h1><p class="muted">Entre para assistir às aulas e baixar sua apostila.</p></div>
+        <div class="field"><label for="de-email">E-mail</label><input id="de-email" name="email" type="email" autocomplete="username" spellcheck="false" value="ana@exemplo.com"></div>
+        <div class="field"><div class="row between"><label for="de-senha">Senha</label><a class="ul small" href="#esqueci" style="color:var(--accent);font-weight:600">Esqueci a senha</a></div><input id="de-senha" name="senha" type="password" autocomplete="current-password" value="senha-exemplo"></div>
+        <button class="btn pri lg full" type="submit">Entrar</button>
+        <p class="muted small" style="text-align:center">Ainda não é aluna? <a class="ul" href="#catalogo" style="color:var(--accent);font-weight:600">Conheça os cursos</a></p>
+      </form>
+    </div>
+  </div>
+</article>
+
+<!-- ============ M1 · LANDING MOBILE ============ -->
+<article class="screen m" aria-label="Landing mobile">
+  {{mtop}}
+  <section class="msec col hero" style="padding-top:32px;align-items:stretch">
+    <h1 class="h1 rise">Extensão de cílios com técnica. <span>E ensinada do zero.</span></h1>
+    <p class="lead muted rise" style="--n:1">Atendimentos e curso profissional em Osasco-SP, com mais de 7&nbsp;anos de experiência.</p>
+    <div class="col g12 rise" style="--n:2"><a class="btn pri full" href="#curso">Conhecer o curso{{i:arrow-right,18}}</a><a class="btn sec full" href="{{WA}}">{{i:whatsapp,18}}Agendar atendimento</a></div>
+    <div class="photo" style="width:auto;height:380px"><img src="fotos/pdf-curso-p2-02.jpg" alt="Camilla Gama, lash designer" width="864" height="656"></div>
+    <div class="col g12 facts" style="align-items:flex-start;padding-top:20px"><span>{{i:map-pin}}Osasco-SP</span><span>{{i:clock}}+7&nbsp;anos de experiência</span><span>{{i:award}}Curso com certificado</span></div>
+  </section>
+  <section class="msec col alt">
+    <div class="row g8" style="flex-wrap:wrap"><span class="tag">{{i:map-pin,14}}Presencial · Osasco-SP</span><span class="tag">{{i:video,14}}Online</span><span class="tag">Iniciante</span></div>
+    <h2 class="h2">Curso de Extensão de Cílios. <span>Do zero ao primeiro atendimento.</span></h2>
+    <div class="photo" style="height:300px"><img src="fotos/pdf-curso-p3-03.jpg" alt="Extensão de cílios vista de perfil" width="681" height="1210" loading="lazy" style="object-position:50% 35%"></div>
+    <div class="row between num"><div class="stat"><b style="font-size:34px">2</b><span>dias</span></div><div class="stat"><b style="font-size:34px">5</b><span>técnicas</span></div><div class="stat"><b style="font-size:34px">20</b><span>itens no kit</span></div></div>
+    <ul class="checks"><li>{{i:package}}Kit profissional completo</li><li>{{i:book}}Apostila exclusiva</li><li>{{i:award}}Certificado de conclusão</li></ul>
+    <div class="col g8"><span class="row g8"><s class="was num"><span class="skip">Preço anterior: </span>R$&nbsp;1.200</s><span class="tag off">−17%</span></span><span><span class="price num">R$&nbsp;1.000</span> <span class="muted small">presencial, à vista ou em até 12x</span></span><span class="muted small row g8">{{i:video,16}}Online: valor sob consulta</span></div>
+    <a class="btn pri full" href="#inscricao">Quero me inscrever</a>
+  </section>
+  <section class="msec col">
+    <span class="tag" style="align-self:flex-start">{{i:file,14}}Apostila · PDF · 30&nbsp;páginas</span>
+    <h2 class="h2">Apostila Profissional. <span>Toda a teoria para ler e reler.</span></h2>
+    <div class="photo" style="height:440px"><img src="fotos/pdf-apostila-p1-07.jpg" alt="Capa da apostila profissional de extensão de cílios" width="1131" height="1600" loading="lazy"></div>
+    <a class="btn pri full" href="#apostila">Quero a apostila</a>
+  </section>
+  <section class="msec col alt">
+    <h2 class="h2">Atendimentos <span>no estúdio</span></h2>
+    <div><div class="svc row"><div class="ficon">{{i:eye}}</div><div class="col"><b>Extensão de cílios</b><span class="muted small">Fio a Fio, Brasileiro, Europeu, Mega e Marrom</span></div></div><div class="svc row"><div class="ficon">{{i:pencil}}</div><div class="col"><b>Design de sobrancelhas</b><span class="muted small">Desenho sob medida para o seu rosto</span></div></div><div class="svc row"><div class="ficon">{{i:shield}}</div><div class="col"><b>Depilação</b><span class="muted small">Acabamento limpo, com biossegurança</span></div></div></div>
+  </section>
+  <section class="msec col deep" style="padding-bottom:72px">
+    <h2 class="h2">Da inscrição à sua vaga em três passos</h2>
+    <div class="step col"><div class="ficon">{{i:pencil}}</div><h3 class="h3">Faça sua inscrição</h3><p class="muted">Preencha seus dados e crie sua conta.</p></div>
+    <div class="step col"><div class="ficon">{{i:whatsapp}}</div><h3 class="h3">Combine o pagamento</h3><p class="muted">Pix ou cartão, direto no WhatsApp.</p></div>
+    <div class="step col"><div class="ficon">{{i:lock}}</div><h3 class="h3">Receba seu acesso</h3><p class="muted">Vaga confirmada e apostila liberada.</p></div>
+  </section>
+  <section class="msec col">
+    <h2 class="h2">Resultados</h2>
+    <div class="gal" style="grid-template-columns:1fr 1fr;gap:12px"><div class="photo"><img src="fotos/post-02.jpg" alt="Cliente com extensão de cílios" width="481" height="640" loading="lazy"></div><div class="photo"><img src="fotos/post-11.jpg" alt="Olho verde com extensão de cílios" width="360" height="640" loading="lazy"></div><div class="photo"><img src="fotos/post-05.jpg" alt="Cliente com cílios e sobrancelhas feitos" width="480" height="640" loading="lazy"></div><div class="photo"><img src="fotos/post-07.jpg" alt="Cliente com extensão de cílios" width="360" height="640" loading="lazy"></div></div>
+  </section>
+  <section class="msec col alt" style="align-items:center;text-align:center;padding-bottom:72px">
+    <img src="fotos/pdf-curso-p10-06.jpg" alt="Camilla Gama sorrindo" width="360" height="360" loading="lazy" class="round" style="width:120px;height:120px;border-radius:50%;object-fit:cover">
+    <h2 class="h2">Vamos começar essa jornada juntas?</h2>
+    <a class="btn pri full" href="{{WA}}">{{i:whatsapp,18}}Chamar no WhatsApp</a>
+    <span class="muted small">@camillagama_lash · Osasco-SP</span>
+  </section>
+</article>
+
+<!-- ============ M2 · INSCRIÇÃO ============ -->
+<article class="screen m" aria-label="Inscrição mobile">
+  {{mnav:Inscrição}}
+  <form class="col g24" style="padding:24px 20px 40px" action="#enviar">
+    <div class="card row g16" style="padding:12px"><img src="fotos/pdf-curso-p3-03.jpg" alt="" width="681" height="1210" style="width:72px;height:72px;border-radius:12px;object-fit:cover;flex:none"><div class="col grow"><span class="label">Você está se inscrevendo em</span><b>Extensão de Cílios — Iniciante</b><span class="num">R$&nbsp;1.000</span></div></div>
+    <div class="col g8"><h1 class="h2">Seus dados</h1><p class="muted">Leva menos de um minuto. O pagamento é combinado depois, pelo WhatsApp.</p></div>
+    <div class="field"><label for="i-nome">Nome completo</label><input id="i-nome" name="nome" type="text" autocomplete="name" value="Ana Souza"></div>
+    <div class="field"><label for="i-zap">WhatsApp</label><input id="i-zap" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" value="(11) 90000-0001"></div>
+    <div class="field"><label for="i-email">E-mail</label><input id="i-email" name="email" type="email" autocomplete="email" spellcheck="false" placeholder="voce@exemplo.com…"></div>
+    <div class="field"><label for="i-senha">Crie uma senha</label><input id="i-senha" name="senha" type="password" autocomplete="new-password" placeholder="Mínimo de 8 caracteres…"></div>
+    <button class="btn pri full" type="submit">Enviar inscrição{{i:arrow-right,18}}</button>
+    <p class="muted small" style="text-align:center">Já tem conta? <a class="ul" href="#entrar" style="color:var(--accent);font-weight:600">Entrar</a></p>
+  </form>
+</article>
+
+<!-- ============ M3 · PEDIDO ENVIADO ============ -->
+<article class="screen m" aria-label="Pedido enviado mobile">
+  {{mtop}}
+  <div class="col g24" style="padding:48px 20px 40px;align-items:center;text-align:center">
+    <div class="ficon" style="width:72px;height:72px;border-radius:50%;background:var(--okbg);color:var(--ok)">{{i:check,32}}</div>
+    <div class="col g12"><h1 class="h2">Inscrição recebida</h1><p class="muted">Falta um passo: fale com a Camilla no WhatsApp para combinar o pagamento. Assim que confirmar, seu acesso é liberado.</p></div>
+    <dl class="card col g12" style="padding:20px;width:100%;text-align:left">
+      <div class="row between"><dt class="muted small">Curso</dt><dd class="small"><b>Extensão de Cílios — Iniciante</b></dd></div>
+      <div class="row between"><dt class="muted small">Valor</dt><dd class="small num"><b>R$&nbsp;1.000</b></dd></div>
+      <div class="row between"><dt class="muted small">Status</dt><dd><span class="tag warn">{{i:clock,14}}Aguardando confirmação</span></dd></div>
+    </dl>
+    <a class="btn pri full" href="{{WA}}">{{i:whatsapp,18}}Continuar no WhatsApp</a>
+    <a class="btn sec full" href="#aluna">Ir para a área da aluna</a>
+  </div>
+</article>
+
+<!-- ============ M4 · ENTRAR ============ -->
+<article class="screen m" aria-label="Entrar mobile">
+  <form class="col g24" style="padding:72px 20px 40px" action="#entrar">
+    <div class="col g8" style="align-items:center;padding-bottom:24px"><a class="logo" href="#topo" translate="no" style="font-size:48px">Camilla <span>Lash</span></a><span class="label">Lash designer · Osasco-SP</span></div>
+    <div class="col g8"><h1 class="h2">Área da aluna</h1><p class="muted">Entre para assistir às aulas e baixar sua apostila.</p></div>
+    <div class="field"><label for="e-email">E-mail</label><input id="e-email" name="email" type="email" autocomplete="username" spellcheck="false" value="ana@exemplo.com"></div>
+    <div class="field"><div class="row between"><label for="e-senha">Senha</label><a class="ul small" href="#esqueci" style="color:var(--accent);font-weight:600">Esqueci a senha</a></div><input id="e-senha" name="senha" type="password" autocomplete="current-password" value="senha-exemplo"></div>
+    <button class="btn pri full" type="submit">Entrar</button>
+    <p class="muted small" style="text-align:center">Ainda não é aluna? <a class="ul" href="#catalogo" style="color:var(--accent);font-weight:600">Conheça o curso</a></p>
+  </form>
+</article>
+
+<!-- ============ M5 · MEUS CURSOS MOBILE ============ -->
+<article class="screen m" aria-label="Meus cursos mobile">
+  <div class="row between" style="padding:24px 20px 8px"><div class="col"><span class="muted small">Olá,</span><h1 class="h2">Ana</h1></div><div class="ini" aria-hidden="true">AS</div></div>
+  <div class="col g16" style="padding:16px 20px 32px">
+    <div class="card col" style="overflow:hidden">
+      <div class="photo dim" style="height:190px;border-radius:0"><img src="fotos/pdf-curso-p3-03.jpg" alt="" width="681" height="1210" style="object-position:50% 35%"><a class="play" href="#aula" aria-label="Continuar a aula" style="width:56px;height:56px">{{i:play,18}}</a></div>
+      <div class="col g12" style="padding:20px"><span class="label">Continuar assistindo</span><h2 class="h3">Extensão de Cílios — Iniciante</h2><span class="muted small">Fundamentos · Ciclo de vida dos cílios</span><div class="row g12"><div class="bar grow"><i style="--p:.33"></i></div><b class="small num">4 de 12</b></div><a class="btn pri full" href="#aula">{{i:play,16}}Continuar aula</a></div>
+    </div>
+    <h2 class="h3" style="padding-top:8px">Minhas apostilas</h2>
+    <div class="card row g12" style="padding:12px 12px 12px 16px"><div class="ficon">{{i:file}}</div><div class="col grow"><b class="small">Apostila Profissional</b><span class="muted small">PDF · 30&nbsp;páginas</span></div><a class="icb" href="#baixar" aria-label="Baixar apostila" style="color:var(--accent)">{{i:download}}</a></div>
+    <h2 class="h3" style="padding-top:8px">Aguardando</h2>
+    <div class="card row g12" style="padding:12px"><img src="fotos/post-12.jpg" alt="" width="480" height="640" style="width:64px;height:64px;border-radius:12px;object-fit:cover;flex:none"><div class="col g8 grow"><b class="small">Design de Sobrancelhas</b><span class="tag warn" style="align-self:flex-start">{{i:clock,14}}Aguardando confirmação</span></div><a class="icb" href="{{WA}}" aria-label="Combinar pagamento no WhatsApp" style="color:var(--accent)">{{i:whatsapp}}</a></div>
+  </div>
+  <nav class="tabbar" aria-label="Área da aluna"><a class="on" href="#cursos" aria-current="page">{{i:cap}}Cursos</a><a href="#catalogo">{{i:grid}}Catálogo</a><a href="#certificados">{{i:award}}Certificados</a><a href="#perfil">{{i:user}}Perfil</a></nav>
+</article>
+
+<!-- ============ M6 · AULA MOBILE ============ -->
+<article class="screen m" aria-label="Aula mobile">
+  {{mnav:Extensão de Cílios}}
+  <div class="photo dim" style="height:220px;border-radius:0"><img src="fotos/post-04.jpg" alt="" width="480" height="640" style="object-position:50% 40%"><button class="play" type="button" aria-label="Reproduzir aula" style="width:56px;height:56px">{{i:play,18}}</button></div>
+  <div class="col g16" style="padding:24px 20px">
+    <div class="col g8"><span class="label">Fundamentos · Aula 4 de 12</span><h1 class="h2" style="font-size:30px">Ciclo de vida dos cílios</h1></div>
+    <p class="muted">As fases anágena, catágena e telógena, e por que as manutenções são necessárias.</p>
+    <button class="btn pri full" type="button">{{i:check,18}}Marcar como concluída</button>
+    <div class="card row g12" style="padding:12px 12px 12px 16px"><div class="ficon">{{i:file}}</div><div class="col grow"><b class="small">Apostila — página 8</b><span class="muted small">PDF</span></div><a class="icb" href="#baixar" aria-label="Baixar material" style="color:var(--accent)">{{i:download}}</a></div>
+  </div>
+  <nav class="col" style="background:#fff;border-top:1px solid var(--line);padding:4px 4px 20px" aria-label="Conteúdo do curso">
+    <div class="mod">Fundamentos</div>
+    <a class="lesson" href="#a1"><span class="dot done">{{i:check,14}}</span>Biossegurança</a>
+    <a class="lesson" href="#a2"><span class="dot done">{{i:check,14}}</span>Tufo, tela e extensão</a>
+    <a class="lesson" href="#a3"><span class="dot done">{{i:check,14}}</span>Tipos de técnicas</a>
+    <a class="lesson on" href="#a4" aria-current="true"><span class="dot"></span>Ciclo de vida dos cílios</a>
+    <div class="mod">Técnicas</div>
+    <a class="lesson" href="#a5"><span class="dot"></span>Fio a Fio</a>
+  </nav>
+</article>
+
+<!-- ============ M7 · CATÁLOGO MOBILE ============ -->
+<article class="screen m" aria-label="Catálogo mobile">
+  {{mtop}}
+  <div class="col g16" style="padding:32px 20px 8px">
+    <h1 class="h1" style="font-size:40px">Cursos e apostilas</h1>
+    <p class="muted">Você pede por aqui, combina o pagamento no WhatsApp e recebe o acesso na sua área de aluna.</p>
+    <nav class="row g8" aria-label="Seções do catálogo" style="flex-wrap:wrap"><a class="tag lk" href="#m-presencial">{{i:map-pin,14}}Presenciais · 2</a><a class="tag lk" href="#m-online">{{i:video,14}}Online · 1</a><a class="tag lk" href="#m-apostilas">{{i:file,14}}Apostilas · 1</a></nav>
+  </div>
+  <section class="msec col" id="m-presencial" style="padding-top:40px">
+    <div class="col g8"><h2 class="h2">Cursos presenciais</h2><p class="muted">Em Osasco-SP, com kit, prática e acompanhamento de perto.</p></div>
+    <a class="card prod col" href="#pagina-curso"><div class="photo"><img src="fotos/pdf-curso-p3-03.jpg" alt="Extensão de cílios vista de perfil" width="480" height="640" loading="lazy" style="object-position:50% 35%"></div><div class="b col" style="padding:20px"><span class="tag" style="align-self:flex-start">{{i:map-pin,14}}Presencial · 2&nbsp;dias</span><h3 class="h3">Extensão de Cílios — Iniciante</h3><p class="muted">Cinco técnicas, kit com 20&nbsp;itens, apostila e certificado.</p><div class="row between" style="padding-top:8px;gap:12px"><span class="col g8"><span class="row g8"><s class="was num"><span class="skip">Preço anterior: </span>R$&nbsp;1.200</s><span class="tag off">−17%</span></span><span class="price num">R$&nbsp;1.000</span></span><span class="btn pri">Quero me inscrever</span></div></div></a>
+    <a class="card prod col" href="{{WA}}"><div class="photo"><img src="fotos/post-12.jpg" alt="Cliente com sobrancelhas desenhadas" width="480" height="640" loading="lazy" style="object-position:50% 20%"></div><div class="b col" style="padding:20px"><span class="tag" style="align-self:flex-start">{{i:map-pin,14}}Presencial</span><h3 class="h3">Design de Sobrancelhas</h3><p class="muted">Próximas turmas sob consulta.</p><div class="row between" style="padding-top:8px;gap:12px"><span class="muted small">Valor sob consulta</span><span class="btn sec">{{i:whatsapp,18}}Consultar datas</span></div></div></a>
+  </section>
+  <section class="msec col alt" id="m-online" style="padding-top:48px">
+    <div class="col g8"><h2 class="h2">Cursos online</h2><p class="muted">Aulas gravadas para assistir no seu ritmo, com apostila e certificado.</p></div>
+    <a class="card prod col" href="#pagina-curso-online"><div class="photo"><img src="fotos/post-04.jpg" alt="Cílios com extensão em volume" width="480" height="640" loading="lazy" style="object-position:50% 40%"></div><div class="b col" style="padding:20px"><span class="tag" style="align-self:flex-start">{{i:video,14}}Online · aulas gravadas</span><h3 class="h3">Extensão de Cílios — Iniciante</h3><p class="muted">As cinco técnicas, da biossegurança ao volume marrom.</p><div class="row between" style="padding-top:8px;gap:12px"><span class="muted small">Valor sob consulta</span><span class="btn pri">Quero me inscrever</span></div></div></a>
+  </section>
+  <section class="msec col" id="m-apostilas" style="padding-top:48px;padding-bottom:56px">
+    <div class="col g8"><h2 class="h2">Apostilas</h2><p class="muted">Material em PDF para ler, reler e treinar.</p></div>
+    <a class="card prod col" href="#apostila"><div class="photo"><img src="fotos/pdf-apostila-p1-07.jpg" alt="Capa da apostila profissional de extensão de cílios" width="480" height="640" loading="lazy" style="object-position:50% 18%"></div><div class="b col" style="padding:20px"><span class="tag" style="align-self:flex-start">{{i:file,14}}PDF · 30&nbsp;páginas</span><h3 class="h3">Apostila Profissional de Extensão de Cílios</h3><p class="muted">Todo o conteúdo teórico do curso em um material só.</p><div class="row between" style="padding-top:8px;gap:12px"><span class="muted small">Valor sob consulta</span><span class="btn pri">Quero comprar</span></div></div></a>
+  </section>
+</article>
+
+<!-- ============ M8 · PÁGINA DO CURSO MOBILE ============ -->
+<article class="screen m" aria-label="Página do curso mobile">
+  {{mnav:Curso}}
+  <div class="photo" style="height:240px;border-radius:0"><img src="fotos/post-10.jpg" alt="Camilla e uma aluna com o certificado do curso" width="480" height="640" style="object-position:50% 30%"></div>
+  <div class="col g16" style="padding:24px 20px 8px">
+    <div class="row g8" style="flex-wrap:wrap"><span class="tag">{{i:map-pin,14}}Presencial · Osasco-SP</span><span class="tag">{{i:video,14}}Online</span><span class="tag">Iniciante</span></div>
+    <h1 class="h1" style="font-size:38px">Curso de Extensão de Cílios</h1>
+    <p class="muted">Um intensivo de 2&nbsp;dias para entrar no mercado com segurança: teoria, treino e prática com modelo real.</p>
+    <div class="card col g12" style="padding:16px">
+      <div class="seg row" role="group" aria-label="Formato do curso"><button type="button" class="on" aria-pressed="true">{{i:map-pin,16}}Presencial</button><button type="button" aria-pressed="false">{{i:video,16}}Online</button></div>
+      <span class="row g8"><s class="was num"><span class="skip">Preço anterior: </span>R$&nbsp;1.200</s><span class="tag off">−17%</span></span>
+      <div><span class="price num" style="font-size:36px">R$&nbsp;1.000</span> <span class="muted small">à vista ou em até 12x</span></div>
+      <ul class="checks small"><li>{{i:package,18}}Kit completo com 20&nbsp;itens</li><li>{{i:book,18}}Apostila exclusiva</li><li>{{i:award,18}}Certificado de conclusão</li><li>{{i:users,18}}Prática com modelo real</li></ul>
+    </div>
+  </div>
+  <section class="msec col" style="padding-top:40px">
+    <h2 class="h2">Seu passo a passo em 2&nbsp;dias</h2>
+    <div class="card col g12" style="padding:20px"><span class="tag" style="align-self:flex-start">Dia 1</span><h3 class="h3">Teoria e treinamento</h3><ul class="checks"><li>{{i:check}}Preparação e higienização dos cílios naturais</li><li>{{i:check}}Materiais e instrumentos</li><li>{{i:check}}Mapeamento e escolha dos fios</li><li>{{i:check}}Segredos para maior durabilidade</li><li>{{i:check}}Acoplamento e isolamento</li><li>{{i:check}}Direcionamento correto dos fios</li><li>{{i:check}}Treino no copo, boneca e esponja</li></ul></div>
+    <div class="card col g12" style="padding:20px"><span class="tag" style="align-self:flex-start">Dia 2</span><h3 class="h3">Prática com modelo</h3><ul class="checks"><li>{{i:check}}Preparação da modelo e análise do olhar</li><li>{{i:check}}Aplicação completa em modelo real, com acompanhamento</li><li>{{i:check}}Correções e dicas para resultados de excelência</li><li>{{i:check}}Finalização, cuidados e manutenção</li></ul></div>
+  </section>
+  <section class="msec col alt" style="padding-top:48px">
+    <h2 class="h2">Técnicas que você vai aprender</h2>
+    <div class="row g8" style="flex-wrap:wrap"><span class="tag">Fio a Fio</span><span class="tag">Volume Brasileiro</span><span class="tag">Volume Europeu (4D)</span><span class="tag">Volume Mega Europeu</span><span class="tag">Volume Marrom</span></div>
+  </section>
+  <section class="msec col" style="padding-top:48px">
+    <h2 class="h2">Kit profissional <span>com 20&nbsp;itens</span></h2>
+    <ul class="checks" style="columns:2;column-gap:16px;font-size:14px"><li>{{i:check,18}}Pinça de isolamento</li><li>{{i:check,18}}Pinça de precisão</li><li>{{i:check,18}}Esponjas para treino</li><li>{{i:check,18}}Pump espumador</li><li>{{i:check,18}}Pump para enxágue</li><li>{{i:check,18}}Fitas micropore</li><li>{{i:check,18}}Fita transpore</li><li>{{i:check,18}}Cola profissional</li><li>{{i:check,18}}Higienizador</li><li>{{i:check,18}}Mini ventilador</li><li>{{i:check,18}}Caneta marcadora</li><li>{{i:check,18}}Caixa de cílios 4D</li><li>{{i:check,18}}Caixa de cílios Y</li><li>{{i:check,18}}Escovinhas</li><li>{{i:check,18}}Microbrush</li><li>{{i:check,18}}Florzinha para cola</li><li>{{i:check,18}}Pads em gel</li><li>{{i:check,18}}Higrômetro</li><li>{{i:check,18}}Máscaras</li><li>{{i:check,18}}Toucas</li></ul>
+  </section>
+  <div class="row g16" style="padding:12px 20px;border-top:1px solid var(--line);background:#fff"><div class="col"><span class="price num" style="font-size:22px">R$&nbsp;1.000</span><span class="muted small">presencial</span></div><a class="btn pri grow" href="#inscricao">Quero me inscrever</a><a class="icb bd" href="{{WA}}" aria-label="Tirar dúvidas no WhatsApp" style="width:48px;height:48px;flex:none">{{i:whatsapp}}</a></div>
+</article>
+
+<!-- ============ M9 · ADMIN: PEDIDOS MOBILE ============ -->
+<article class="screen m" aria-label="Painel, pedidos de inscrição mobile">
+  {{mtop}}
+  <div class="col g16" style="padding:24px 20px 32px">
+    <div class="col g8"><h1 class="h2">Pedidos de inscrição</h1><p class="muted small">Libere o acesso depois de confirmar o pagamento no WhatsApp.</p></div>
+    <div class="g2" style="gap:12px">
+      <div class="card kpi col" style="padding:16px"><span class="label">Aguardando liberação</span><b class="num" style="font-size:28px">3</b></div>
+      <div class="card kpi col" style="padding:16px"><span class="label">Liberados este mês</span><b class="num" style="font-size:28px">8</b></div>
+      <div class="card kpi col" style="padding:16px"><span class="label">Alunas ativas</span><b class="num" style="font-size:28px">24</b></div>
+      <div class="card kpi col" style="padding:16px"><span class="label">Itens no catálogo</span><b class="num" style="font-size:28px">4</b></div>
+    </div>
+    <div class="find" style="position:relative"><label for="m-busca" class="skip">Buscar pedido</label><input id="m-busca" type="search" name="busca" autocomplete="off" placeholder="Buscar por nome ou WhatsApp…" style="padding-left:44px"><span style="position:absolute;left:14px;top:14px;color:var(--muted)">{{i:search}}</span></div>
+    <div class="row g8" role="group" aria-label="Filtrar por status" style="flex-wrap:wrap"><button class="tag on" type="button" aria-pressed="true">Pendentes · 3</button><button class="tag" type="button" aria-pressed="false">Liberados</button><button class="tag" type="button" aria-pressed="false">Cancelados</button><button class="tag" type="button" aria-pressed="false">Todos</button></div>
+    <div class="card col g12" style="padding:16px"><div class="row g12"><div class="ini" aria-hidden="true">AS</div><div class="col grow"><b>Ana Souza</b><span class="muted small">Design de Sobrancelhas</span></div><span class="tag warn">Pendente</span></div><div class="row between small muted num"><span>(11)&nbsp;90000-0001</span><span>Hoje, 14:20</span></div><div class="row g8"><a class="icb bd" href="#wa" aria-label="Conversar no WhatsApp" style="width:48px;height:48px;flex:none">{{i:whatsapp}}</a><button class="btn pri grow" type="button">Liberar acesso</button></div></div>
+    <div class="card col g12" style="padding:16px"><div class="row g12"><div class="ini" aria-hidden="true">BL</div><div class="col grow"><b>Bruna Lima</b><span class="muted small">Extensão de Cílios — Presencial</span></div><span class="tag warn">Pendente</span></div><div class="row between small muted num"><span>(11)&nbsp;90000-0002</span><span>Hoje, 10:05</span></div><div class="row g8"><a class="icb bd" href="#wa" aria-label="Conversar no WhatsApp" style="width:48px;height:48px;flex:none">{{i:whatsapp}}</a><button class="btn pri grow" type="button">Liberar acesso</button></div></div>
+    <div class="card col g12" style="padding:16px"><div class="row g12"><div class="ini" aria-hidden="true">LA</div><div class="col grow"><b>Larissa Alves</b><span class="muted small">Apostila Profissional</span></div><span class="tag warn">Pendente</span></div><div class="row between small muted num"><span>(11)&nbsp;90000-0003</span><span>Ontem, 19:42</span></div><div class="row g8"><a class="icb bd" href="#wa" aria-label="Conversar no WhatsApp" style="width:48px;height:48px;flex:none">{{i:whatsapp}}</a><button class="btn pri grow" type="button">Liberar acesso</button></div></div>
+    <button class="btn sec full" type="button">{{i:plus,18}}Liberar para uma aluna</button>
+  </div>
+  <nav class="tabbar" aria-label="Painel"><a href="#resumo">{{i:home}}Resumo</a><a href="#pedidos" class="on" aria-current="page">{{i:inbox}}Pedidos</a><a href="#cursos">{{i:cap}}Cursos</a><a href="#alunas">{{i:users}}Alunas</a></nav>
+</article>
+
+<!-- ============ M10 · ADMIN: EDITAR CURSO MOBILE ============ -->
+<article class="screen m" aria-label="Painel, editar curso mobile">
+  {{mnav:Editar curso}}
+  <form class="col g16" style="padding:24px 20px 24px" action="#salvar">
+    <div class="col g8"><span class="tag ok" style="align-self:flex-start">{{i:check,14}}Publicado</span><h1 class="h2" style="font-size:30px">Extensão de Cílios — Iniciante</h1></div>
+    <div class="photo" style="height:180px"><img src="fotos/pdf-curso-p3-03.jpg" alt="Capa atual do curso" width="681" height="1210" style="object-position:50% 35%"></div>
+    <button class="btn sec" type="button" style="align-self:flex-start">{{i:image,18}}Trocar capa</button>
+    <div class="field"><label for="m-titulo">Título</label><input id="m-titulo" name="titulo" type="text" autocomplete="off" value="Extensão de Cílios — Iniciante"></div>
+    <div class="row g12"><div class="field grow"><label for="m-tipo">Formatos</label><input id="m-tipo" name="tipo" type="text" autocomplete="off" value="Presencial e online"></div><div class="field" style="width:120px"><label for="m-area">Área</label><input id="m-area" name="area" type="text" autocomplete="off" value="Cílios"></div></div>
+    <div class="row g12"><div class="field grow"><label for="m-preco">Preço atual</label><input id="m-preco" name="preco" type="text" inputmode="decimal" autocomplete="off" value="R$ 1.000,00"></div><div class="field grow"><label for="m-preco-de">Original <span class="muted" style="font-weight:400">(opcional)</span></label><input id="m-preco-de" name="precoOriginal" type="text" inputmode="decimal" autocomplete="off" value="R$ 1.200,00"></div></div>
+    <div class="col g8" style="padding:14px 16px;border-radius:12px;background:#fff;border:1px solid var(--line)"><span class="label">Como aparece no site</span><div class="row g12"><span class="row g8"><s class="was num"><span class="skip">Preço anterior: </span>R$&nbsp;1.200</s><span class="tag off">−17%</span></span><span class="price num" style="font-size:22px">R$&nbsp;1.000</span></div><span class="muted small">Deixe o preço original em branco para mostrar só o preço atual.</span></div>
+    <div class="field"><label for="m-acesso">Acesso às aulas</label><input id="m-acesso" name="acesso" type="text" autocomplete="off" value="12 meses"></div>
+    <div class="field"><label for="m-desc">Descrição</label><textarea id="m-desc" name="descricao">Intensivo de 2 dias: teoria, treino e prática com modelo real.</textarea></div>
+    <div class="row between" style="padding-top:16px"><h2 class="h3">Módulos e aulas</h2><button class="btn sec" type="button" style="height:40px;padding:0 16px">{{i:plus,18}}Módulo</button></div>
+    <div class="card col g8" style="padding:12px">
+      <div class="row between" style="padding:8px"><b class="row g8"><span class="muted">{{i:grip,18}}</span>Fundamentos</b><span class="muted small">4 aulas</span></div>
+      <div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span><span class="grow">Biossegurança</span><span class="muted small row g8">{{i:video,16}}Vídeo</span></div><div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span><span class="grow">Tufo, tela e extensão</span><span class="muted small row g8">{{i:video,16}}Vídeo</span></div><div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span><span class="grow">Tipos de técnicas</span><span class="muted small row g8">{{i:video,16}}Vídeo</span></div><div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span><span class="grow">Ciclo de vida dos cílios</span><span class="muted small row g8">{{i:file,16}}Vídeo + PDF</span></div>
+      <button class="lesson dash" type="button">{{i:plus,18}}Adicionar aula</button>
+    </div>
+    <div class="card col g8" style="padding:12px">
+      <div class="row between" style="padding:8px"><b class="row g8"><span class="muted">{{i:grip,18}}</span>Técnicas</b><span class="muted small">5 aulas</span></div>
+      <div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span><span class="grow">Fio a Fio</span><span class="muted small row g8">{{i:video,16}}Vídeo</span></div><div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span><span class="grow">Volume Brasileiro</span><span class="muted small row g8">{{i:video,16}}Vídeo</span></div><div class="lesson" style="background:var(--bg)"><span class="muted">{{i:grip,18}}</span><span class="grow">Volume Europeu (4D)</span><span class="tag warn">Sem vídeo</span></div>
+      <button class="lesson dash" type="button">{{i:plus,18}}Adicionar aula</button>
+    </div>
+  </form>
+  <div class="row g12" style="padding:12px 20px;border-top:1px solid var(--line);background:#fff"><a class="icb bd" href="#ver" aria-label="Ver página do curso" style="width:48px;height:48px;flex:none">{{i:eye}}</a><button class="btn pri grow" type="button">Salvar alterações</button></div>
+</article>
+
+</body>
+</html>
