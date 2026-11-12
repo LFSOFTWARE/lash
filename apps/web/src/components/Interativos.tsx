@@ -6,7 +6,10 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Icon } from './Icon';
 import { Preco } from './Site';
-import { WA } from '@/lib/site';
+import { PRODUTOS, WA } from '@/lib/site';
+import { PrecoProduto } from './Produto';
+
+const ONLINE = PRODUTOS.find((p) => p.id === 'cilios-online')!;
 
 /** Formulário de demonstração: ao enviar, só navega para a próxima tela. */
 export function FormDemo({ to, className, children }: { to: string; className?: string; children: React.ReactNode }) {
@@ -37,8 +40,8 @@ export function Investimento() {
           </>
         ) : (
           <>
-            <span className="price" style={{ fontSize: 28 }}>Valor sob consulta</span>
-            <p className="text-sm text-muted">Aulas gravadas para assistir no seu ritmo. O valor e o pagamento são combinados pelo WhatsApp.</p>
+            <PrecoProduto p={ONLINE} size={44} />
+            <p className="text-sm text-muted">Aulas gravadas para assistir no seu ritmo. O pagamento é combinado pelo WhatsApp.</p>
           </>
         )}
       </div>

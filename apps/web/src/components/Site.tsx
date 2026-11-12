@@ -13,14 +13,20 @@ export function Logo({ className = '', href = '/' }: { className?: string; href?
   );
 }
 
-const LINKS = [
+// Páginas do catálogo: no topo do menu do celular, com ícone e descrição.
+const PRINCIPAIS = [
+  ['/catalogo', 'Catálogo', 'grid', 'Cursos e apostilas, com preços'],
+  ['/cursos', 'Cursos', 'cap', 'Presenciais e online'],
+  ['/apostilas', 'Apostilas', 'book', 'Material em PDF'],
+] as const;
+// Seções da home.
+const SECOES = [
   ['/#sobre', 'Sobre'],
   ['/#atendimentos', 'Atendimentos'],
-  ['/#curso', 'Cursos'],
-  ['/#apostila', 'Apostilas'],
   ['/#resultados', 'Resultados'],
   ['/#duvidas', 'Dúvidas'],
 ] as const;
+const LINKS = [...PRINCIPAIS.map(([h, t]) => [h, t] as const), ...SECOES];
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
@@ -28,7 +34,7 @@ export function SiteNav() {
     <header className="sticky top-0 z-20 border-b border-line bg-bg">
       <div className="wrap flex h-14 items-center justify-between lg:h-[72px]">
         <Logo />
-        <nav className="navlinks hidden items-center gap-8 text-[15px] lg:flex" aria-label="Principal">
+        <nav className="navlinks hidden items-center gap-6 text-[15px] xl:gap-8 lg:flex" aria-label="Principal">
           {LINKS.map(([href, t]) => (
             <Link key={href} href={href} className="py-1.5">{t}</Link>
           ))}
@@ -42,10 +48,21 @@ export function SiteNav() {
         </button>
       </div>
       {open && (
-        <nav id="menu-mobile" className="fixed inset-x-0 top-14 bottom-0 z-20 flex flex-col gap-1 overflow-y-auto overscroll-contain bg-bg px-5 py-6 lg:hidden" aria-label="Principal">
-          {LINKS.map(([href, t]) => (
-            <Link key={href} href={href} className="t-h3 border-b border-line py-4" onClick={() => setOpen(false)}>{t}</Link>
-          ))}
+        <nav id="menu-mobile" className="absolute inset-x-0 top-full z-20 flex h-[calc(100dvh-3.5rem)] flex-col overflow-y-auto overscroll-contain border-t border-line bg-bg px-5 py-6 lg:hidden" aria-label="Principal">
+          <div className="flex flex-col gap-3">
+            {PRINCIPAIS.map(([href, t, ic, d]) => (
+              <Link key={href} href={href} className="card flex items-center gap-4 p-4" onClick={() => setOpen(false)}>
+                <div className="ficon"><Icon name={ic} /></div>
+                <div className="flex min-w-0 flex-1 flex-col"><b className="text-[17px]">{t}</b><span className="text-sm text-muted">{d}</span></div>
+                <Icon name="arrow-right" className="text-accent" />
+              </Link>
+            ))}
+          </div>
+          <div className="mt-4 flex flex-col">
+            {SECOES.map(([href, t]) => (
+              <Link key={href} href={href} className="t-h3 border-b border-line py-4" onClick={() => setOpen(false)}>{t}</Link>
+            ))}
+          </div>
           <div className="mt-6 flex flex-col gap-3">
             <Link className="btn btn-sec" href="/entrar" onClick={() => setOpen(false)}><Icon name="user" size={18} />Área da aluna</Link>
             <a className="btn btn-pri" href={WA}><Icon name="whatsapp" size={18} />Agendar no WhatsApp</a>

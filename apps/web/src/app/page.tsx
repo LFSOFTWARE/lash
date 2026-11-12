@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import { Icon } from '@/components/Icon';
+import { AtalhosCatalogo, PrecoProduto } from '@/components/Produto';
 import { Preco, SiteFooter, SiteNav } from '@/components/Site';
-import { INSTAGRAM, WA, WA_LABEL, foto } from '@/lib/site';
+import { APOSTILAS, INSTAGRAM, PRODUTOS, WA, WA_LABEL, foto } from '@/lib/site';
+
+const ONLINE = PRODUTOS.find((p) => p.id === 'cilios-online')!;
+const APOSTILA = APOSTILAS[0];
 
 const SERVICOS = [
   ['eye', 'Extensão de cílios', 'Fio a Fio, Volume Brasileiro, Volume Europeu (4D), Mega Europeu e Volume Marrom.'],
@@ -51,6 +55,10 @@ export default function Landing() {
           <div className="photo hero-photo h-[380px] flex-none lg:h-[620px] lg:w-[560px]">
             <img src={foto('pdf-curso-p2-02.jpg')} alt="Camilla Gama, lash designer" width={864} height={656} fetchPriority="high" style={{ objectPosition: '64% 0', height: '109%' }} />
           </div>
+        </section>
+
+        <section className="wrap pb-14 lg:pb-20">
+          <AtalhosCatalogo />
         </section>
 
         <section className="alt sec" id="sobre">
@@ -126,11 +134,11 @@ export default function Landing() {
                 </Link>
                 <Link className="card flex flex-col gap-3 p-5" href="/inscricao">
                   <span className="t-label flex items-center gap-2"><Icon name="video" size={16} />Online · aulas gravadas</span>
-                  <span className="leading-7 text-muted">Valor sob consulta</span>
+                  <PrecoProduto p={ONLINE} />
                   <span className="go self-start">Quero me inscrever<Icon name="arrow-right" size={18} /></span>
                 </Link>
               </div>
-              <Link className="go self-start" href="/catalogo">Ver também o curso de Design de Sobrancelhas<Icon name="arrow-right" size={18} /></Link>
+              <Link className="btn btn-sec btn-lg lg:self-start" href="/cursos">Ver todos os cursos<Icon name="arrow-right" size={18} /></Link>
             </div>
           </div>
         </section>
@@ -146,12 +154,13 @@ export default function Landing() {
                   <li key={t}><Icon name="check" />{t}</li>
                 ))}
               </ul>
-              <div className="flex flex-col gap-3 pt-2 lg:flex-row lg:items-center lg:gap-6">
+              <PrecoProduto p={APOSTILA} size={32} />
+              <div className="flex flex-col gap-3 pt-2 lg:flex-row lg:items-center">
                 <Link className="btn btn-pri btn-lg" href="/inscricao">Quero a apostila</Link>
-                <span className="text-sm text-muted">Valor sob consulta</span>
+                <Link className="btn btn-sec btn-lg" href="/apostilas">Ver todas as apostilas<Icon name="arrow-right" size={18} /></Link>
               </div>
             </div>
-            <Link className="photo h-[480px] flex-none lg:h-[594px] lg:w-[420px]" href="/catalogo#apostilas">
+            <Link className="photo h-[480px] flex-none lg:h-[594px] lg:w-[420px]" href="/apostilas">
               <img src={foto('pdf-apostila-p1-07.jpg')} alt="Capa da apostila profissional de extensão de cílios" width={1131} height={1600} loading="lazy" />
             </Link>
           </div>

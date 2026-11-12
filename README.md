@@ -10,7 +10,9 @@ Dados de alunas, pedidos e aulas são exemplos; ainda não há API nem banco.
 | Rota | Tela |
 |---|---|
 | `/` | Landing |
-| `/catalogo` | Cursos presenciais, cursos online e apostilas |
+| `/catalogo` | Tudo: cursos presenciais, cursos online e apostilas, com preços |
+| `/cursos` | Todos os cursos (presenciais e online), com preços |
+| `/apostilas` | Todas as apostilas, com preços |
 | `/cursos/extensao-de-cilios` | Página do curso (Presencial / Online) |
 | `/inscricao` → `/inscricao/enviada` | Inscrição e confirmação |
 | `/entrar` | Login da aluna |
