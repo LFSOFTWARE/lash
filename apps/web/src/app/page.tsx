@@ -92,11 +92,11 @@ export default function Landing() {
             </div>
             <div className="grid flex-none grid-cols-2 gap-3 lg:w-[560px] lg:gap-6">
               <figure className="flex flex-col gap-3">
-                <div className="photo arch h-[260px] lg:h-[400px]"><img src={foto('pdf-curso-p6-04.jpg')} alt="Olho com extensão de cílios em fio marrom" width={300} height={470} loading="lazy" /></div>
+                <div className="photo arch h-[260px] lg:h-[400px]"><img src={foto('pdf-curso-p7-05.jpg')} alt="Olho com extensão de cílios em fio marrom" width={300} height={470} loading="lazy" /></div>
                 <figcaption className="t-label">Fio marrom</figcaption>
               </figure>
               <figure className="flex flex-col gap-3 lg:mt-14">
-                <div className="photo arch h-[260px] lg:h-[400px]"><img src={foto('pdf-curso-p7-05.jpg')} alt="Olho com extensão de cílios em volume europeu" width={300} height={470} loading="lazy" /></div>
+                <div className="photo arch h-[260px] lg:h-[400px]"><img src={foto('pdf-curso-p6-04.jpg')} alt="Olho com extensão de cílios em volume europeu" width={300} height={470} loading="lazy" /></div>
                 <figcaption className="t-label">Volume europeu</figcaption>
               </figure>
             </div>
