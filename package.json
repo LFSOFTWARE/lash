@@ -4,6 +4,10 @@
   "packageManager": "pnpm@10.34.5",
   "scripts": {
     "dev": "pnpm --filter web dev",
-    "build": "pnpm --filter web build"
+    "dev:api": "pnpm --filter api dev",
+    "build": "pnpm --filter web build",
+    "build:api": "pnpm --filter api build",
+    "seed": "pnpm --filter api seed",
+    "test:api": "pnpm --filter api test:e2e"
   }
 }

@@ -2,8 +2,8 @@
 
 Site e área de alunas da **Camilla Lash** (Camilla Gama, lash designer em Osasco-SP).
 
-Esta é a **versão de teste do front-end**: páginas estáticas em Next.js + Tailwind, publicadas no GitHub Pages.
-Dados de alunas, pedidos e aulas são exemplos; ainda não há API nem banco.
+- `apps/web`: front em Next.js + Tailwind. A versão de teste está publicada no GitHub Pages e usa dados de exemplo; ainda não chama a API.
+- `apps/api`: API em NestJS + MongoDB (catálogo, inscrição pelo WhatsApp, área da aluna e painel). Veja [apps/api/README.md](apps/api/README.md).
 
 ## Páginas
 
@@ -23,11 +23,17 @@ Todas as telas são responsivas: o mesmo conteúdo no desktop e no celular.
 
 ## Rodar localmente
 
-Requer Node 20 e pnpm.
+Requer Node 20, pnpm e Docker (para o MongoDB).
 
 ```bash
 pnpm install
-pnpm dev
+pnpm dev                 # front em http://localhost:3000
+
+docker compose up -d     # MongoDB
+cp apps/api/.env.example apps/api/.env
+pnpm seed                # dados iniciais
+pnpm dev:api             # API em http://localhost:3333/api (docs em /api/docs)
+pnpm test:api            # testes da API
 ```
 
 `pnpm build` gera o site estático em `apps/web/out`.
@@ -35,6 +41,7 @@ pnpm dev
 ## Publicação
 
 Cada push na `main` roda `.github/workflows/pages.yml`, que gera o site e publica no GitHub Pages.
+Mudanças em `apps/api` rodam `.github/workflows/api.yml`, com os testes da API contra um MongoDB. A API ainda não está publicada.
 
 ## Documentos
 

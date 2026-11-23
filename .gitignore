@@ -9,3 +9,5 @@ next-env.d.ts
 design/prototipo.figma.html
 .DS_Store
 .claude/
+dist/
+uploads/
