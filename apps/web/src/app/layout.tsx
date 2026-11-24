@@ -18,7 +18,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2" href="#conteudo">
           Pular para o conteúdo
         </a>
-        <p className="bg-ink px-5 py-1.5 text-center text-[13px] text-white">Versão de teste: os dados de alunas e pedidos são exemplos.</p>
+        {!process.env.NEXT_PUBLIC_API_URL && (
+          <p className="bg-ink px-5 py-1.5 text-center text-[13px] text-white">Versão de teste: os dados de alunas e pedidos são exemplos e nada é salvo.</p>
+        )}
         {children}
       </body>
     </html>

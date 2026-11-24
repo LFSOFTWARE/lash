@@ -1,11 +1,9 @@
 import Link from 'next/link';
 import { Icon } from '@/components/Icon';
-import { AtalhosCatalogo, PrecoProduto } from '@/components/Produto';
-import { Preco, SiteFooter, SiteNav } from '@/components/Site';
-import { APOSTILAS, INSTAGRAM, PRODUTOS, WA, WA_LABEL, foto } from '@/lib/site';
+import { AtalhosCatalogo, PrecoDe } from '@/components/Produto';
+import { SiteFooter, SiteNav } from '@/components/Site';
+import { INSTAGRAM, WA, WA_LABEL, foto } from '@/lib/site';
 
-const ONLINE = PRODUTOS.find((p) => p.id === 'cilios-online')!;
-const APOSTILA = APOSTILAS[0];
 
 const SERVICOS = [
   ['eye', 'Extensão de cílios', 'Fio a Fio, Volume Brasileiro, Volume Europeu (4D), Mega Europeu e Volume Marrom.'],
@@ -127,14 +125,14 @@ export default function Landing() {
                 <li><Icon name="award" />Certificado de conclusão</li>
               </ul>
               <div className="grid gap-3 pt-2 md:grid-cols-2 lg:gap-6">
-                <Link className="card flex flex-col gap-3 p-5" href="/inscricao">
+                <Link className="card flex flex-col gap-3 p-5" href="/inscricao?produto=extensao-de-cilios-presencial">
                   <span className="t-label flex items-center gap-2"><Icon name="map-pin" size={16} />Presencial · 2&nbsp;dias em Osasco-SP</span>
-                  <Preco sufixo="à vista ou em até 12x" />
+                  <PrecoDe slug="extensao-de-cilios-presencial" sufixo="à vista ou em até 12x" />
                   <span className="go self-start">Quero me inscrever<Icon name="arrow-right" size={18} /></span>
                 </Link>
-                <Link className="card flex flex-col gap-3 p-5" href="/inscricao">
+                <Link className="card flex flex-col gap-3 p-5" href="/inscricao?produto=extensao-de-cilios-online">
                   <span className="t-label flex items-center gap-2"><Icon name="video" size={16} />Online · aulas gravadas</span>
-                  <PrecoProduto p={ONLINE} />
+                  <PrecoDe slug="extensao-de-cilios-online" />
                   <span className="go self-start">Quero me inscrever<Icon name="arrow-right" size={18} /></span>
                 </Link>
               </div>
@@ -154,9 +152,9 @@ export default function Landing() {
                   <li key={t}><Icon name="check" />{t}</li>
                 ))}
               </ul>
-              <PrecoProduto p={APOSTILA} size={32} />
+              <PrecoDe slug="apostila-extensao-de-cilios" size={32} />
               <div className="flex flex-col gap-3 pt-2 lg:flex-row lg:items-center">
-                <Link className="btn btn-pri btn-lg" href="/inscricao">Quero a apostila</Link>
+                <Link className="btn btn-pri btn-lg" href="/inscricao?produto=apostila-extensao-de-cilios">Quero a apostila</Link>
                 <Link className="btn btn-sec btn-lg" href="/apostilas">Ver todas as apostilas<Icon name="arrow-right" size={18} /></Link>
               </div>
             </div>

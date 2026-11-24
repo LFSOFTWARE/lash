@@ -15,6 +15,8 @@
   --color-okbg: #e4f0e9;
   --color-warn: #8a5a0b;
   --color-warnbg: #faeed3;
+  --color-err: #a3283a;
+  --color-errbg: #fbe6e8;
   --font-serif: var(--font-cormorant), Georgia, serif;
   --font-sans: var(--font-dm), system-ui, sans-serif;
   --ease-ui: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -122,12 +124,22 @@
   /* Formulários */
   .field { @apply flex flex-col gap-2; }
   .field label { @apply text-sm font-semibold; }
-  .field input, .field textarea, .find input {
+  .field input, .field textarea, .field select, .find input {
     @apply h-12 w-full rounded-xl border border-line bg-white px-4 text-base text-ink;
     transition: border-color 150ms var(--ease-ui);
   }
   .field textarea { @apply h-[110px] resize-y py-3; }
-  .field input:focus-visible, .field textarea:focus-visible, .find input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 0; border-color: var(--color-accent); }
+  .field input:focus-visible, .field textarea:focus-visible, .field select:focus-visible, .find input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 0; border-color: var(--color-accent); }
+  .chk { @apply flex items-center gap-3 text-[15px]; }
+  .chk input { @apply h-5 w-5 flex-none accent-accent; }
+  .aviso { @apply flex items-start gap-3 rounded-xl px-4 py-3.5 text-[15px]; }
+  .aviso-err { @apply bg-errbg text-err; }
+  .aviso-ok { @apply bg-okbg text-ok; }
+  .aviso-info { @apply bg-bg2 text-ink; }
+  .tag-err { @apply bg-errbg text-err; }
+  .btn:disabled, .btn[aria-disabled="true"] { @apply cursor-not-allowed opacity-50; }
+  dialog.modal { @apply m-auto w-[calc(100%-32px)] max-w-[540px] rounded-2xl border border-line bg-white p-0 text-ink; max-height: calc(100dvh - 32px); }
+  dialog.modal::backdrop { background: rgb(51 32 42 / 0.45); }
   .seg { @apply flex gap-1 rounded-full bg-bg2 p-1; }
   .seg button { @apply flex h-9 flex-1 items-center justify-center gap-2 rounded-full text-sm font-semibold text-muted; transition: background-color 120ms var(--ease-ui); }
   .seg button[aria-pressed="true"] { @apply bg-white text-ink; }

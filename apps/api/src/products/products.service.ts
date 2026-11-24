@@ -49,7 +49,7 @@ export class ProductsService {
       ordem: m.ordem,
       aulas: aulas
         .filter((a) => String(a.moduleId) === String(m._id))
-        .map((a) => ({ id: String(a._id), titulo: a.titulo, descricao: a.descricao, duracao: a.duracao, aulaGratis: a.aulaGratis, materiais: a.materiais.length })),
+        .map((a) => ({ id: String(a._id), titulo: a.titulo, descricao: a.descricao, duracao: a.duracao, aulaGratis: a.aulaGratis, materiais: a.materiais.map((m) => m.nome) })),
     }));
   }
 

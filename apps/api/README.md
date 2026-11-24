@@ -39,7 +39,7 @@ Contas do seed, só para desenvolvimento:
 |---|---|---|
 | GET | `/health` | API e banco no ar |
 | GET | `/produtos?tipo=&formato=&categoria=` | Catálogo publicado |
-| GET | `/produtos/:slug` | Página do produto; o curso online vem com a grade, sem os vídeos |
+| GET | `/produtos/:slug` | Página do produto; o curso online vem com a grade (títulos e nomes dos materiais, sem os vídeos) |
 | POST | `/inscricoes` | Cria a conta e o pedido; devolve `whatsappUrl` e os tokens |
 | POST | `/leads` | Formulário de contato da landing |
 | GET | `/aulas/:id/video` | Player (aula grátis ou aluna com acesso) |

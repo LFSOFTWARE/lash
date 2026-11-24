@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Icon } from './Icon';
-import { CURSO, INSTAGRAM, WA, WA_LABEL } from '@/lib/site';
+import { INSTAGRAM, WA, WA_LABEL } from '@/lib/site';
 
 export function Logo({ className = '', href = '/' }: { className?: string; href?: string }) {
   return (
@@ -86,24 +86,6 @@ export function SiteFooter() {
         <span className="text-sm text-muted">© 2026 Camilla Gama · Lash Designer</span>
       </div>
     </footer>
-  );
-}
-
-/** Preço atual e, se houver, o preço original riscado com o selo de desconto. */
-export function Preco({ size = 28, sufixo }: { size?: number; sufixo?: string }) {
-  return (
-    <span className="flex flex-col gap-2">
-      {CURSO.precoOriginal && (
-        <span className="flex items-center gap-2">
-          <s className="was num"><span className="sr">Preço anterior: </span>{CURSO.precoOriginal}</s>
-          <span className="tag tag-off">{CURSO.desconto}</span>
-        </span>
-      )}
-      <span>
-        <span className="price num" style={{ fontSize: size }}>{CURSO.preco}</span>
-        {sufixo && <span className="text-sm text-muted"> {sufixo}</span>}
-      </span>
-    </span>
   );
 }
 
